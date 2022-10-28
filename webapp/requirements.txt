@@ -1,0 +1,34 @@
+Charles Nykamp and Barry Nwike 
+CS257
+Webapp Requirements
+
+Database Source: https://www.kaggle.com/datasets/datasnaek/chess
+
+DESCRIPTION: 
+-A "chill" tracker and review program for chess where chess players of any level can look at opening moves,
+review past games of players of similar level, search for general game datat and more!
+
+FEATURES:
+-A search feature which will grab one or more games matching the inputs
+    Inputs include:
+        - Player Names/IDS
+        - Opening Name/Move code
+        - # of Turns
+        - User ratings (If not exact, grabs 5 around that rating)
+- Visual Display of selected game
+    -Can be viewed move by move using a forward and back button
+    -Provides stats about pieces lost, # of turns, how the match concluded (mate, draw, time, etc.)
+
+User Stories:
+
+A mildly interested chess observer can view the game with highly-rated players.
+Implementation: We could have a search bar with several different filters. One of the filters is the rating of the players.
+When you search, it displays a list of games that match the filters. You can click one of the items and it brings you to a
+page with the game board, which you can click through.
+
+A beginner who wants a way to learn more about an actual game, movements, strategies, etc. 
+Implementation: Within our search bar, a user can search for a specific opening name, or a starting piece.  These will return
+a list of games that started with that opener or used that specific piece.  
+
+
+
