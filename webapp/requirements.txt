@@ -1,12 +1,39 @@
-Charles Nykamp and Barry Nwike 
+Charles Nykamp and Barry Nwike
 CS257
 Webapp Requirements
 
-Database Source: https://www.kaggle.com/datasets/datasnaek/chess
 
-DESCRIPTION: 
+DESCRIPTION OF DATASET:
+Database Source: https://www.kaggle.com/datasets/datasnaek/chess
+We have a dataset of games that were played on the chess website Lichess.
+Some of the fields that we are going to use are:
+Start Time, End Time, Number of Turns, Game Status (resign, mate, outoftime, draw), 
+Winner, White Player Rating, Black Player Rating,
+All Moves in Standard Chess Notation,
+Opening Name
+
+USER STORIES:
+
+1. A mildly interested chess observer can search for a game with highly-rated players and view it move-by-move.
+
+Implementation: We could have a search page several different filters. One of the filters is the rating of the players.
+When you search, it displays a list of games that match the filters. You can click one of the items and it brings you to a
+page with the game board, which you can click through.
+
+2. A beginner who wants a way to learn more about an actual game, movements, strategies, etc. can see them in real games.
+
+Implementation: Within our search, a user can search for a specific opening name, or a starting piece. These will return
+a list of games that started with that opener or used that specific piece.
+The visual Display of selected game can be viewed move by move using a forward and back button
+It also provides stats about pieces lost, # of turns, how the match concluded (mate, draw, time, etc.)
+
+
+
+
+
+DESCRIPTION:
 -A "chill" tracker and review program for chess where chess players of any level can look at opening moves,
-review past games of players of similar level, search for general game datat and more!
+review past games of players of similar level, search for general game data and more!
 
 FEATURES:
 -A search feature which will grab one or more games matching the inputs
@@ -15,20 +42,9 @@ FEATURES:
         - Opening Name/Move code
         - # of Turns
         - User ratings (If not exact, grabs 5 around that rating)
-- Visual Display of selected game
-    -Can be viewed move by move using a forward and back button
-    -Provides stats about pieces lost, # of turns, how the match concluded (mate, draw, time, etc.)
 
-User Stories:
 
-A mildly interested chess observer can view the game with highly-rated players.
-Implementation: We could have a search bar with several different filters. One of the filters is the rating of the players.
-When you search, it displays a list of games that match the filters. You can click one of the items and it brings you to a
-page with the game board, which you can click through.
 
-A beginner who wants a way to learn more about an actual game, movements, strategies, etc. 
-Implementation: Within our search bar, a user can search for a specific opening name, or a starting piece.  These will return
-a list of games that started with that opener or used that specific piece.  
 
 
 
