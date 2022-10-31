@@ -14,13 +14,13 @@ CREATE TABLE season(
 CREATE TABLE game(
     id SERIAL
     year integer
-    season_id integer
+    season text
     city text
 )
-CREATE TABLE sports_category{ 
+CREATE TABLE sports_category( 
     id SERIAL
     category text
-}
+)
 CREATE TABLE events(
     id SERIAL
     category_id SERIAL
