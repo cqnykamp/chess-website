@@ -50,3 +50,16 @@
     border: solid;
     padding: 2vh;
 }
+
+#game-viewer button {
+    width: 49%;
+    height: 3em;
+}
+
+#gameboard {
+    padding-bottom: 2vh;
+}
+
+#footer {
+    text-align: center;
+}
