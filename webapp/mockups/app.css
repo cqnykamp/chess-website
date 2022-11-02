@@ -41,5 +41,12 @@
 }
 
 #game-viewer > div {
-    padding: 5vh;
+    margin: 5vh;
+}
+
+#sidebar {
+    border-width: 1wh;
+    border-color: black;
+    border: solid;
+    padding: 2vh;
 }
