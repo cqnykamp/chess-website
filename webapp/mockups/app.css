@@ -1,0 +1,35 @@
+.game-square {
+    user-select: none;
+
+}
+
+.black-square {
+    background-color: blue;
+}
+
+.white-square {
+    background-color: white;
+}
+
+.game-square img {
+    width: 98%;
+    height: 98%;
+    object-fit: contain;
+}
+
+.board_row {
+    display: flex;
+}
+
+
+
+.captured {
+    display: flex;    
+}
+
+
+.captured img {
+    width: 5vh;
+    height: 5vh;
+    object-fit: contain;
+}
