@@ -5,11 +5,30 @@
         <title>Analychess</title>
         <meta charset='UTF-8'>
         <link rel='stylesheet' type='text/css' href='app.css' />
+        <script type = "text/javascript" src = "mockup2.js"></script>
     </head>
 
     <body>
 
         <h1>Analychess</h1>
+        
+        <ul id = "filterList" style ="list-style: none;">
+            <li> Username: 
+                <input id = "user_search"><button id ="usersearchbutton" style="text-shadow: 100px;"><em>GO</em></button>
+            </li>
+            <li> Starting Move: 
+                <input id = "startmove_search"><button id ="movesearchbutton" style="text-shadow: 100px;"><em>GO</em></button>
+            </li>
+            <li> # of Moves in Game: 
+                <input id = "movenumb_search"><button id ="number_button" style="text-shadow: 100px;"><em>GO</em></button>
+            </li>
+            <li> Rating: 
+                <input id = "above_rate_search"> ~
+                <input id = "below_rate_search">
+                <button id ="ratehbutton" style="text-shadow: 100px;"><em>GO</em></button>
+            </li>            
+
+        </ul>
 
     </body>
 

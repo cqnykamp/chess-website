@@ -1,3 +1,6 @@
+body{
+    background-color: lightgreen;
+}
 .game-square {
     user-select: none;
 
