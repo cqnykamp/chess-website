@@ -35,8 +35,8 @@ function drawBoard() {
 
     console.log(`Screen size is ${screenWidth} wide and ${screenHeight} tall`);
 
-    let lesserDim = Math.min(screenWidth, screenHeight * 0.9);
-    let squareSize = (lesserDim  * 0.90) / 8;
+    let lesserDim = Math.min(screenWidth, screenHeight * 0.65);
+    let squareSize = lesserDim / 8;
     console.log(`Square size is ${squareSize}`);
 
     let squares = "";

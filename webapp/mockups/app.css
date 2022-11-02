@@ -33,3 +33,13 @@
     height: 5vh;
     object-fit: contain;
 }
+
+
+#game-viewer {
+    display: flex;
+    flex-direction: row;
+}
+
+#game-viewer > div {
+    padding: 5vh;
+}
