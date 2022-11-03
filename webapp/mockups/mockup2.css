@@ -94,6 +94,19 @@
     padding: 2vh;
 }
 
+#sidebar ol {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#sidebar li {
+    display: inline-flex;
+    /* width: 25%;
+    float: left; */
+    padding: 0px;
+    margin: 0px;
+}
+
 #game-viewer button {
     width: 49%;
     height: 3em;
