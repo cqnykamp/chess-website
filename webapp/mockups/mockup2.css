@@ -46,7 +46,9 @@
 
 .game-square {
     user-select: none;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .black-square {
@@ -58,8 +60,8 @@
 }
 
 .game-square img {
-    width: 98%;
-    height: 98%;
+    width: 80%;
+    height: 80%;
     object-fit: contain;
 }
 
