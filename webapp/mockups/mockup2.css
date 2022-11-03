@@ -1,15 +1,4 @@
 
-
-body {
-    padding-top: 7vh;
-}
-
-
-#game-info {
-    margin-left: 8vw;
-    margin-bottom: 0vw;
-}
-
 .game-square {
     user-select: none;
 
@@ -47,18 +36,57 @@ body {
 }
 
 
+
+
+#game-info {
+    height: 6vh;
+    margin-left: 10vh;
+    margin-bottom: 0vh;
+    margin-top: 0vh;
+    font-size: x-large;
+    display: flex;
+    justify-content: space-between;
+
+    width: 31%;
+}
+
+#game-info h1 {
+    margin: 0px;
+}
+
+#game-info .player-name {
+    font-size: xx-large;
+}
+
+#game-info .player-rating {
+    font-size: large;
+    vertical-align: bottom;
+}
+
+#game-info img {
+    width: 0.5em;
+    height: 0.5em;
+    object-fit: contain;
+    margin: 0px;
+    padding: 0px;
+}
+
+
 #game-viewer {
     margin-top: 0vh;
     padding-top: 0vh;
     display: flex;
     flex-direction: row;
+
+    margin-left: 10vh;
+    margin-bottom: 0vh;
 }
 
 #game-viewer > div {
     margin-top: 2vh;
-    margin-left: 4vw;
-    margin-bottom: 4vh;
-
+    margin-right: 1vw;
+    /* margin-left: 4vw; */
+    margin-bottom: 0vh;
 }
 
 #sidebar {
@@ -75,7 +103,10 @@ body {
 }
 
 #gameboard {
-    padding-bottom: 2vh;
-    margin-top: 
+    margin-bottom: 2vh;
+    border-width: 2wh;
+    border-color: black;
+    border-style: inset;
+
 }
 

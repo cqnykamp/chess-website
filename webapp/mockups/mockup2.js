@@ -20,6 +20,8 @@ function initialBoardPosition() {
     return board;
 }
 
+const boardScreenUsage = 0.7;
+
 
 function drawBoard() {
 
@@ -35,8 +37,11 @@ function drawBoard() {
 
     console.log(`Screen size is ${screenWidth} wide and ${screenHeight} tall`);
 
-    let lesserDim = Math.min(screenWidth, screenHeight * 0.65);
-    let squareSize = lesserDim / 8;
+    let lesserDim = Math.min(screenWidth, screenHeight);
+    console.log(`lesser dim is ${lesserDim}`);
+
+    let squareSize = (lesserDim * boardScreenUsage) / 8;
+
     console.log(`Square size is ${squareSize}`);
 
     let squares = "";
