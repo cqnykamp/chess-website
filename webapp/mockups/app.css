@@ -2,6 +2,7 @@ body{
     background-color: lightgreen;
 }
 
+<<<<<<< HEAD
 h1{
     text-align: left;
     margin-left: 50px;
@@ -12,6 +13,37 @@ li{
     margin-bottom: 10px;
 }
 
+=======
+
+nav {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    padding: 2vh;
+
+    background-color: darkgreen;
+    color: white;
+
+    font-size: 4vh;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+}
+
+nav img {
+    height: 4vh;
+}
+
+footer {
+    text-align: center;
+    font-style: italic;
+}
+
+
+
+
+
+>>>>>>> df9b20ce24e57dc55c48e7d6c1e9def154da5c5c
 .game-square {
     user-select: none;
 
@@ -68,12 +100,10 @@ li{
 #game-viewer button {
     width: 49%;
     height: 3em;
+    cursor: pointer;
 }
 
 #gameboard {
     padding-bottom: 2vh;
 }
 
-#footer {
-    text-align: center;
-}
