@@ -1,0 +1,81 @@
+
+
+body {
+    padding-top: 7vh;
+}
+
+
+#game-info {
+    margin-left: 8vw;
+    margin-bottom: 0vw;
+}
+
+.game-square {
+    user-select: none;
+
+}
+
+.black-square {
+    background-color: blue;
+}
+
+.white-square {
+    background-color: white;
+}
+
+.game-square img {
+    width: 98%;
+    height: 98%;
+    object-fit: contain;
+}
+
+.board_row {
+    display: flex;
+}
+
+
+
+.captured {
+    display: flex;    
+}
+
+
+.captured img {
+    width: 5vh;
+    height: 5vh;
+    object-fit: contain;
+}
+
+
+#game-viewer {
+    margin-top: 0vh;
+    padding-top: 0vh;
+    display: flex;
+    flex-direction: row;
+}
+
+#game-viewer > div {
+    margin-top: 2vh;
+    margin-left: 4vw;
+    margin-bottom: 4vh;
+
+}
+
+#sidebar {
+    border-width: 1wh;
+    border-color: black;
+    border: solid;
+    padding: 2vh;
+}
+
+#game-viewer button {
+    width: 49%;
+    height: 3em;
+    cursor: pointer;
+}
+
+#gameboard {
+    padding-bottom: 2vh;
+    margin-top: 
+}
+
