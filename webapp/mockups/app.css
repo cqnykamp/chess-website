@@ -18,6 +18,11 @@ nav {
     font-weight: bolder;
 }
 
+nav a {
+    color: inherit;
+    text-decoration: none;
+}
+
 nav img {
     height: 4vh;
 }
