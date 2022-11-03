@@ -1,6 +1,17 @@
 body{
     background-color: lightgreen;
 }
+
+h1{
+    text-align: left;
+    margin-left: 50px;
+
+}
+
+li{
+    margin-bottom: 10px;
+}
+
 .game-square {
     user-select: none;
 
