@@ -1,0 +1,112 @@
+
+.game-square {
+    user-select: none;
+
+}
+
+.black-square {
+    background-color: blue;
+}
+
+.white-square {
+    background-color: white;
+}
+
+.game-square img {
+    width: 98%;
+    height: 98%;
+    object-fit: contain;
+}
+
+.board_row {
+    display: flex;
+}
+
+
+
+.captured {
+    display: flex;    
+}
+
+
+.captured img {
+    width: 5vh;
+    height: 5vh;
+    object-fit: contain;
+}
+
+
+
+
+#game-info {
+    height: 6vh;
+    margin-left: 10vh;
+    margin-bottom: 0vh;
+    margin-top: 0vh;
+    font-size: x-large;
+    display: flex;
+    justify-content: space-between;
+
+    width: 31%;
+}
+
+#game-info h1 {
+    margin: 0px;
+}
+
+#game-info .player-name {
+    font-size: xx-large;
+}
+
+#game-info .player-rating {
+    font-size: large;
+    vertical-align: bottom;
+}
+
+#game-info img {
+    width: 0.5em;
+    height: 0.5em;
+    object-fit: contain;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+#game-viewer {
+    margin-top: 0vh;
+    padding-top: 0vh;
+    display: flex;
+    flex-direction: row;
+
+    margin-left: 10vh;
+    margin-bottom: 0vh;
+}
+
+#game-viewer > div {
+    margin-top: 2vh;
+    margin-right: 1vw;
+    /* margin-left: 4vw; */
+    margin-bottom: 0vh;
+}
+
+#sidebar {
+    border-width: 1wh;
+    border-color: black;
+    border: solid;
+    padding: 2vh;
+}
+
+#game-viewer button {
+    width: 49%;
+    height: 3em;
+    cursor: pointer;
+}
+
+#gameboard {
+    margin-bottom: 2vh;
+    border-width: 2wh;
+    border-color: black;
+    border-style: inset;
+
+}
+
