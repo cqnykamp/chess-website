@@ -2,7 +2,6 @@ body{
     background-color: lightgreen;
 }
 
-<<<<<<< HEAD
 h1{
     text-align: left;
     margin-left: 50px;
@@ -13,7 +12,6 @@ li{
     margin-bottom: 10px;
 }
 
-=======
 
 nav {
     position: absolute;
@@ -42,8 +40,6 @@ footer {
 
 
 
-
->>>>>>> df9b20ce24e57dc55c48e7d6c1e9def154da5c5c
 .game-square {
     user-select: none;
 
