@@ -7,39 +7,59 @@
         <link rel='stylesheet' type='text/css' href='app.css' />
         <link rel="icon" href="chess-piece-images/king-white.png" type="image/icon type">
         <link rel='stylesheet' type='text/css' href='app.css' />
-        <script type = "text/javascript" src = "mockup`.js"></script>
+        <script type = "text/javascript" src = "mockup1.js"></script>
     </head>
 
     <body>
         <nav><a href="mockup1.html"><img src='chess-piece-images/king-white.png' />Analychess</a></nav>
-        <hr />
-        
-        <ul id = "filterList" style ="list-style: none;">
-            <li> Username: 
-                <input id = "user_search"><button id ="usersearchbutton" style="text-shadow: 100px;"><em>GO</em></button>
-            </li>
-            <li> Starting Move: 
-                <input id = "startmove_search"><button id ="movesearchbutton" style="text-shadow: 100px;"><em>GO</em></button>
-            </li>
-            <li> # of Moves in Game: 
-                <input id = "movenumb_search"><button id ="number_button" style="text-shadow: 100px;"><em>GO</em></button>
-            </li>
-            <li> Rating: 
-                <input id = "above_rate_search"> ~
-                <input id = "below_rate_search">
-                <button id ="ratehbutton" style="text-shadow: 100px;"><em>GO</em></button>
-            </li>            
-
-        </ul>
-        
+        <div class = "pageelements">
+            <div class = introduction>
+                <ul style ="list-style: none;">
+                    <h2>Welcome to Analychess!</h2>
+                    <p><img id = "homeicon" src ="chess-piece-images/knight-white.png"></p>
+                </ul>
+            </div>
+            <div class="searchfunction">
+                <h3>Find Games where: </h3>
+                
+                <ul id = "filterList" style ="list-style: none;">
+                    <li> Username: 
+                        <input id = "user_search">
+                    </li>
+                    <li> Starting Move: 
+                        <input id = "startmove_search">
+                    </li>
+                    <li> # of Moves in Game: 
+                        <input id = "movenumb_search">
+                    </li>
+                    <li> Rating between: 
+                        <input id = "above_rate_search"> ~
+                        <input id = "below_rate_search">
+                    </li>  
+                    <div class="search">
+                        <button id ="searchbutton" style="text-shadow: 100px;"><a href="mockup2.html">Search</a></button>
+                    </div>          
+            
+                </ul>    
+            </div>
+        </div>
+           
+            
         <div class = "games">
-            <ul id = "gamelist">
-                <li> <img src = "chess-piece-images/queen-white.png"> <h3><em>avocado</em> (1458) vs <em>Terry</em> (1522)</h3> </li>
+            <hr />
+            <h2>Top Games of the Day:</h2>
+            <ul style ="list-style: none;">
+                <li> 
+                    <img src = "chess-piece-images/queen-white.png"/> 
+                    <h3><a href="mockup2.html"><em>avocado</em> (1458) vs <em>Terry</em> (1522)</a></h3> 
+                </li>
 
             </ul>
 
 
         </div>
+        
+        <footer>Created by <a href='https://github.com/BNwike47'>Barry Nwike</a> and <a href='https://github.com/cqnykamp'>Charles Nykamp</a> for Carleton College Software Design Class, Fall 2022</footer>
 
     </body>
 

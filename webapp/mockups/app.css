@@ -2,16 +2,76 @@ body{
     padding-top: 7vh;
     background-color: lightgreen;
     padding-top: 6vh;
+    
+    font-family: fantasy;
 }
 
-
+input{
+    transition: width 0.4s ease-in-out;
+  }
+  
+input:focus {
+    width: 40%;
+}
+.search{
+    text-align: center;
+    margin-right: 78%;
+}
+button {
+    background-color: #04AA6D;
+    width: 80px;
+    height: 60px;
+    font-family: fantasy;
+    color: white;
+    cursor: pointer;
+}
 h1{
     text-align: left;
     margin-left: 50px;
 }
 
+.pageelements{
+    overflow-x: auto;
+    border: 5px solid black;
+    margin: 1rem;
+    padding: 1rem 1rem;
+    
+}
+.introduction{
+    display: inline-flex;
+    padding: 1rem;
+    text-align: left;
+    width: 30%;
+    margin-top: 10px;
+    
+}
+.searchfunction{
+    padding-left: 20px;
+    display:inline-flex;
+    margin-left: 30px;
+    border: 1px solid black;
+    text-align: left;
+    vertical-align: center;
+    
+}
+#homeicon{
+    float: left;
+    height: 30%;
+    width: 30%;   
+    padding-top: 5px;
+    object-fit: contain;
+}
+
 li{
     margin-bottom: 10px;
+}
+
+li img{
+    float: left;
+    height: 2%;
+    width: 2%;   
+    padding-right: 5px;
+    object-fit: contain;
 }
 
 nav {
@@ -45,7 +105,7 @@ nav img {
 }
 
 footer {
-    margin-top: 3vh;
+    margin-top: 12vh;
     margin-bottom: 0vh;
     padding-bottom: 0vh;
     height: 3vh;
