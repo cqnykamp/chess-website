@@ -20,10 +20,16 @@ function initialBoardPosition() {
     return board;
 }
 
-const boardScreenUsage = 0.7;
+const boardScreenHeightUsage = 0.65;
+
+// The gameboard should never take up more than this percentage of the
+// screen width
+const boardMaxScreenWidthUsage = 0.8;
 
 
 function drawBoard() {
+
+    let gameHeading = document.getElementById("game-heading");
 
     let board = initialBoardPosition();
 
@@ -37,12 +43,18 @@ function drawBoard() {
 
     console.log(`Screen size is ${screenWidth} wide and ${screenHeight} tall`);
 
-    let lesserDim = Math.min(screenWidth, screenHeight);
-    console.log(`lesser dim is ${lesserDim}`);
+    let heightConstraint = screenHeight * boardScreenHeightUsage;
+    let widthConstraint = screenWidth * boardMaxScreenWidthUsage;
 
-    let squareSize = (lesserDim * boardScreenUsage) / 8;
+    let boardSize = Math.min(widthConstraint, heightConstraint);
 
+    let squareSize = boardSize / 8;
     console.log(`Square size is ${squareSize}`);
+
+
+    gameHeading.style.width = `${boardSize}px`;
+    gameHeading.style.fontSize = `${boardSize / 15}px`;
+
 
     let squares = "";
     for(let row=0; row<board.length; row++) {

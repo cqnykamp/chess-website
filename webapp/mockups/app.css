@@ -1,3 +1,8 @@
+/* 
+Authors: Barry Nwike and Charles Nykamp
+Final Project CS257 F22
+ */
+
 body{
     padding-top: 7vh;
     background-color: lightgreen;
@@ -78,7 +83,7 @@ nav {
     position: absolute;
     left: 0;
     top: 0;
-    width: 100vw;
+    right: 0;
     height: 6vh;
 
     background-color: darkgreen;

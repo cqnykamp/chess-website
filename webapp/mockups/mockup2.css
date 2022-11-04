@@ -1,7 +1,60 @@
+/* 
+Authors: Barry Nwike and Charles Nykamp
+Final Project CS257 F22
+ */
+
+
+
+#game-heading {
+    height: 6vh;
+
+    margin-left: 10vw;
+    margin-bottom: 0vh;
+    margin-top: 0vh;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+#game-heading .player-name {
+    font-style: italic;
+}
+
+#game-heading .player-rating {
+    font-size: large;
+    vertical-align: bottom; 
+}
+
+#game-heading img {
+    width: 1em;
+    height: 1em;
+    object-fit: contain;
+}
+
+
+
+
+#game-viewer {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10vw;
+}
+
+#game-viewer > div {
+    margin-top: 2vh;
+    margin-right: 1vw;
+    /* margin-left: 4vw; */
+    margin-bottom: 0vh;
+}
+
+
+
 
 .game-square {
     user-select: none;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .black-square {
@@ -13,8 +66,8 @@
 }
 
 .game-square img {
-    width: 98%;
-    height: 98%;
+    width: 80%;
+    height: 80%;
     object-fit: contain;
 }
 
@@ -38,62 +91,25 @@
 
 
 
-#game-info {
-    height: 6vh;
-    margin-left: 10vh;
-    margin-bottom: 0vh;
-    margin-top: 0vh;
-    font-size: x-large;
-    display: flex;
-    justify-content: space-between;
 
-    width: 31%;
-}
-
-#game-info h1 {
-    margin: 0px;
-}
-
-#game-info .player-name {
-    font-size: xx-large;
-}
-
-#game-info .player-rating {
-    font-size: large;
-    vertical-align: bottom;
-}
-
-#game-info img {
-    width: 0.5em;
-    height: 0.5em;
-    object-fit: contain;
-    margin: 0px;
-    padding: 0px;
-}
-
-
-#game-viewer {
-    margin-top: 0vh;
-    padding-top: 0vh;
-    display: flex;
-    flex-direction: row;
-
-    margin-left: 10vh;
-    margin-bottom: 0vh;
-}
-
-#game-viewer > div {
-    margin-top: 2vh;
-    margin-right: 1vw;
-    /* margin-left: 4vw; */
-    margin-bottom: 0vh;
-}
 
 #sidebar {
     border-width: 1wh;
     border-color: black;
     border: solid;
-    padding: 2vh;
+    padding-left: 1vw;
+    padding-top: 0vh;
+}
+
+#sidebar ol {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#sidebar li {
+    display: inline-flex;
+    padding: 0px;
+    margin: 0px;
 }
 
 #game-viewer button {
@@ -110,3 +126,8 @@
 
 }
 
+
+
+hr {
+    border-color: black;
+}
