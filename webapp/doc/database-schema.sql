@@ -21,7 +21,6 @@ CREATE TABLE games(
     black_player_rating integer,
     victory_status text,
     winner text,
-
     rated_status boolean,
     opening_name text,
     increment_code text,
