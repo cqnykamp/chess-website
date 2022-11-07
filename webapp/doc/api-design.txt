@@ -21,6 +21,12 @@ GET Parameters:
 
     opening_moves (Optional, default: "") --returns a list of games where a given sequence of strings is played out at the beginning
     Ex: /gameslist?opening_moves=d4c6kd7
+    
+    page_size (Optional, default: "")
+    
+    page_id (Optional, default: 1)
+    
+    
 
 RESPONSE: A JSON list of dictionaries, each of which represents the metadata of a particular game. Each dictionary will have
 the following fields:
