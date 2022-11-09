@@ -2,28 +2,34 @@ CREATE TABLE athletes(
     id SERIAL
     full_name text
 );
-CREATE TABLE NOC(
+CREATE TABLE noc(
     id SERIAL
-    NOC text
+    noc text
+);
+CREATE TABLE region(
+    id SERIAL
     region text
 );
-CREATE TABLE season(
-    id SERIAL
-    season_name text
-)
 CREATE TABLE game(
     id SERIAL
     year integer
-    season text
+    game text
     city text
-)
+);
 CREATE TABLE sports_category( 
     id SERIAL
     category text
-)
+);
 CREATE TABLE events(
     id SERIAL
     category_id SERIAL
     event_name text
-)
-CREATE TABLE olympic
+);
+CREATE TABLE {
+    athlete_id SERIAL
+    noc text
+    region text
+    game_id SERIAL
+    event_id SERIAL
+    
+}
