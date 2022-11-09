@@ -1,5 +1,12 @@
 
-// var board = initialBoardPosition();
+
+const boardScreenHeightUsage = 0.65;
+
+// The gameboard should never take up more than this percentage of the
+// screen width
+const boardMaxScreenWidthUsage = 0.8;
+
+
 
 function initialBoardPosition() {
     let board = Array.from({ length: 8 }, () => 
@@ -20,14 +27,82 @@ function initialBoardPosition() {
     return board;
 }
 
-const boardScreenHeightUsage = 0.65;
 
-// The gameboard should never take up more than this percentage of the
-// screen width
-const boardMaxScreenWidthUsage = 0.8;
+/**
+ * Given a move such as Nxf3+, find which piece we're referring to by finding its position before the move
+ * Returns (y-pos, x-pos) as indices
+ * @param move the move string
+ */
+function findMovingPiecePosition(move) {
+
+    unparsedMove 
+
+    let pieceType;
+    if(move[0] == 'K') {
+        pieceType = 'king';
+
+    } else if(move[0] == 'Q') {
+        pieceType = 'queen';
+    } else if(move[0] == 'R') {
+        pieceType = 'rook';
+    } else if(move[0] == 'B') {
+        pieceType = 'bishop';
+    } else if(move[0] == 'N') {
+        pieceType = 'knight';
+    } else {
+        // no letter
+        pieceType = 'pawn';
+    }
 
 
-function drawBoard() {
+
+}
+
+
+var pieceLetterToName = {
+    'K': 'king',
+    'Q': 'queen',
+    'R': 'rook',
+    'B': 'bishop',
+    'N': 'knight',
+
+    // otherwise pawn
+}
+
+var colLetterToIndex = {
+    'a': 0,
+    'b': 1,
+    'c': 2,
+    'd': 3,
+    'e': 4,
+    'f': 5,
+    'g': 6,
+    'h': 7,
+};
+
+
+function chessNotationToIndex(move) {
+    let colLetter = move[0];
+    let rowNum = move[1];
+    let extra = move.substring(2);
+
+    console.log(`Column: ${colLetter} row: ${rowNum} extra: ${extra}`);
+
+    return (colLetterToIndex[colLetter], Number(rowNum), extra);
+}
+
+
+function boardPositionFrom(moves) {
+    let board = initialBoardPosition();
+
+}
+
+
+
+function draw() {
+
+
+    chessNotationToIndex('c4');
 
     let gameHeading = document.getElementById("game-heading");
 
@@ -64,7 +139,7 @@ function drawBoard() {
             
             let possibleImage = "";
             if(board[row][col] != "") {
-                possibleImage = `<img src='chess-piece-images/${board[row][col]}.png' />`;
+                possibleImage = `<img src='../static/images/${board[row][col]}.png' />`;
 
             }
 
@@ -83,5 +158,5 @@ function drawBoard() {
     gameboard.innerHTML = squares;
 }
 
-window.onload = drawBoard;
-window.onresize = () => drawBoard();
+window.onload = draw;
+window.onresize = () => draw();
