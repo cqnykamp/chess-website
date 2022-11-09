@@ -35,6 +35,7 @@ def main():
             opening = row[14]
             
             
+            # Add this username to the userlist if not already there, and get it's corresponding id
             white_user_id = None
             if white_username in users:
                 white_user_id = users[white_username]
@@ -43,7 +44,7 @@ def main():
                 users[white_username] = white_user_id
                 user_count += 1
 
-
+            # Add this username to the userlist if not already there, and get it's corresponding id
             black_user_id = None
             if black_username in users:
                 black_user_id = users[black_username]
@@ -52,7 +53,7 @@ def main():
                 users[black_username] = black_user_id
                 user_count += 1
 
-
+            # Add this opening to the opening list if not already there, and get it's corresponding id
             opening_id = None
             if opening in openings:
                 opening_id = openings[opening]
@@ -62,6 +63,7 @@ def main():
                 opening_count += 1
 
 
+            # Write one game to our csv
             games_writer.writerow([game_id, white_user_id, black_user_id, turns, moves, white_rating, black_rating, victory_status, winner, opening_id, increment_code]) 
             
 

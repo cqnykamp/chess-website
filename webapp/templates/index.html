@@ -7,7 +7,7 @@
         <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='app.css') }}" />
         <link rel="icon" href="{{ url_for('static', filename='/images/king-white.png') }}" type="image/icon type">
         <link rel='stylesheet' type='text/css' href='app.css' />
-        <script type = "text/javascript" src = "mockup1.js"></script>
+        <script type = "text/javascript" src = "{{ url_for('static', filename='index.js') }} "></script>
     </head>
 
     <body>
@@ -37,7 +37,7 @@
                         <input id = "below_rate_search">
                     </li>  
                     <div class="search">
-                        <button id ="searchbutton" style="text-shadow: 100px;"><a href="mockup2.html">Search</a></button>
+                        <button id ="searchbutton" style="text-shadow: 100px;">Search</button>
                     </div>          
             
                 </ul>    
@@ -56,6 +56,8 @@
 
             </ul>
 
+
+            <div id="searchResults"></div>
 
         </div>
         
