@@ -22,6 +22,6 @@ CREATE TABLE games(
     victory_status text,
     winner text,
     rated_status boolean,
-    opening_name text,
+    opening_id integer,
     increment_code text,
 );
