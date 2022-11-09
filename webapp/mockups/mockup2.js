@@ -139,7 +139,7 @@ function draw() {
             
             let possibleImage = "";
             if(board[row][col] != "") {
-                possibleImage = `<img src='chess-piece-images/${board[row][col]}.png' />`;
+                possibleImage = `<img src='../static/images/${board[row][col]}.png' />`;
 
             }
 
