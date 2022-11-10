@@ -127,13 +127,9 @@ function draw() {
     console.log(`Square size is ${squareSize}`);
 
 
-    gameHeading.style.width = `${boardSize}px`;
-    gameHeading.style.fontSize = `${boardSize / 15}px`;
-
-
     let squares = "";
     for(let row=0; row<board.length; row++) {
-        let rowHtml = `<div class="board_row">`;
+        let rowHtml = `<tr class="board_row">`;
 
         for(let col=0; col<board[0].length; col++) {
             
@@ -143,15 +139,15 @@ function draw() {
 
             }
 
-            let backgroundColor = ((row + col) % 2 == 1) ? 'white' : 'grey';
+            let squareColor = ((row + col) % 2 == 1) ? 'white-square' : 'black-square';
 
-            rowHtml += `<div id='square_${row}_${col}'
-                class="game-square"
-                style="width: ${squareSize}px; height: ${squareSize}px; background-color: ${backgroundColor};">
+            rowHtml += `<td id='square_${row}_${col}'
+                class="game-square ${squareColor}"
+                style="width: ${squareSize}px; height: ${squareSize}px;">
                     ${possibleImage}
-            </div>`;
+            </td>`;
         }
-        rowHtml += `</div>`;
+        rowHtml += `</tr>`;
         squares = rowHtml + squares;
     }
 

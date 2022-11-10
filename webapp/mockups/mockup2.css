@@ -1,31 +1,23 @@
 /* 
 Authors: Barry Nwike and Charles Nykamp
 Final Project CS257 F22
- */
+*/
 
 
-
-#game-heading {
-    height: 6vh;
-
-    margin-left: 10vw;
-    margin-bottom: 0vh;
-    margin-top: 0vh;
-
-    display: flex;
-    justify-content: space-between;
+.player {
+    display: inline-block;
 }
 
-#game-heading .player-name {
+.player .player-name {
     font-style: italic;
 }
 
-#game-heading .player-rating {
+.player .player-rating {
     font-size: large;
     vertical-align: bottom; 
 }
 
-#game-heading img {
+.player img {
     width: 1em;
     height: 1em;
     object-fit: contain;
@@ -34,18 +26,27 @@ Final Project CS257 F22
 
 
 
-#game-viewer {
+.container {
     display: flex;
-    flex-direction: row;
-    margin-left: 10vw;
+    /* flex-direction: row; */
+    /* flex-grow: 1px; */
+    /* flex-shrink: 1px; */
+    /* flex-basis: 0px; */
+    flex-wrap: wrap;
+
+
+    margin-left: 4vw;
 }
 
-#game-viewer > div {
+.left {
+    width: 45vw;
+}
+
+/* .container > div {
     margin-top: 2vh;
     margin-right: 1vw;
-    /* margin-left: 4vw; */
     margin-bottom: 0vh;
-}
+} */
 
 
 
@@ -58,7 +59,7 @@ Final Project CS257 F22
 }
 
 .black-square {
-    background-color: blue;
+    background-color: grey;
 }
 
 .white-square {
@@ -71,7 +72,7 @@ Final Project CS257 F22
     object-fit: contain;
 }
 
-.board_row {
+#gameboard tr {
     display: flex;
 }
 
@@ -91,23 +92,23 @@ Final Project CS257 F22
 
 
 
-
-
-#sidebar {
-    border-width: 1wh;
-    border-color: black;
-    border: solid;
-    padding-left: 1vw;
-    padding-top: 0vh;
+#info-panel {
+    /* box-sizing: border-box; */
+    /* border-width: 1wh;
+    border-color: black; */
+    /* border: solid; */
+    /* padding-left: 1vw;
+    padding-top: 0vh; */
 }
 
-#sidebar ol {
-    display: flex;
-    flex-wrap: wrap;
+#moves-panel ol {
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    column-count: 3;
 }
 
-#sidebar li {
-    display: inline-flex;
+#moves-panel li {
+    /* display: inline-flex; */
     padding: 0px;
     margin: 0px;
 }
@@ -118,13 +119,12 @@ Final Project CS257 F22
     cursor: pointer;
 }
 
-#gameboard {
+/* #gameboard {
     margin-bottom: 2vh;
     border-width: 2wh;
     border-color: black;
     border-style: inset;
-
-}
+} */
 
 
 

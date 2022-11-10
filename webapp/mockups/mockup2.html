@@ -15,65 +15,67 @@
 
         <nav><a href="mockup1.html"><img src='../static/images/king-white.png' />Analychess</a></nav>
 
-        <h1 id='game-heading'>
-                <div><span class="player-name">avocado</span> <img src="../static/images/king-white.png" /> <span class="player-rating">1458</span>
+        <h1>
+                Game:
+                <div class="player">
+                    <span class="player-name">avocado</span>
+                    <img src="../static/images/king-white.png" />
+                    <span class="player-rating">1458</span>
                 </div>                    
 
-                <div>vs</div>
+                vs
             
-                <div>
-                <span class="player-name">Terry</span> <img src="../static/images/king-black.png" /> <span class="player-rating">1522</span>
+                <div class="player">
+                    <span class="player-name">Terry</span>
+                    <img src="../static/images/king-black.png" />
+                    <span class="player-rating">1522</span>
                 </div>
         </h1>
 
+        <div class='container'>
 
-        <div id='game-viewer'>
-
-            <div>
-                <div id="gameboard" ></div>
-                <button>&#9668; Back</button>
-                <button>Forward &#9658;</button>
-            </div>
-
-            
-            <div id="sidebar">
+            <div class='split left'>
 
                 <h3>Turn: 3</h3>
 
-                <p>Lead: <b>Black</b></p>
+                <button>&#9668; Back</button>
+                <button>Forward &#9658;</button>
+                
+                <div id="moves-panel">
 
-                <p>Moves: 
-                    <ol>
-                    <li>1. <b>e4 c5</b> </li>
-                    <li>2. <b>Nf3 d5</b> </li>
-                    <li>3. <b>exd5 Qxd5</b> </li>
-                    <li>4. <b>Nc3 Qe6+</b> </li>
-                    <li>5. <b>Qe2 Qxe2+</b> </li>
-                    <li>6. <b>Bxe2 Nf6</b> </li>
-                    <li>7. <b>O-O g6</b> </li>
-                    <li>8. <b>d3 Bg7</b> </li>
-                    <li>9. <b>Nb5 Na6</b> </li>
-                    <li>10. <b>Bf4 O-O</b> </li>
-                    <li>11. <b>d4 Bd7</b> </li>
-                    <li>12. <b>dxc5 Bxb5</b> </li>
-                    <li>13. <b>Bxb5</b> Nxc5 </li>
-                    <li>14.  Be3 Ne6 </li>
-                    <li>15. Nd4 a6 </li>
-                    <li>16. Bd3 Nxd4 </li>
-                    <li>17. Bxd4 Rad8 </li>
-                    <li>18. Bb6 Rd6 </li>
-                    <li>19. Bc5 Rd7 </li>
-                    <li>20. Rfe1 Re8 </li>
-                    <li>21. c3 Nd5 </li>
-                    <li>22. Bc2 Rc7 </li>
-                    <li>23. Ba3 b5 </li>
-                    <li>24. Rad1 Rd7 </li>
-                    <li>25. c4 e6 </li>
-                    <li>26. cxd5 exd5 </li>
-                    <li>27. Rxe8+ Bf8 </li>
-                                            
-                    </ol>                    
-                </p>
+                    Moves: 
+                        <ol>
+                        <li>e4 c5 </li>
+                        <li>Nf3 d5 </li>
+                        <li>exd5 Qxd5 </li>
+                        <li>Nc3 Qe6+ </li>
+                        <li>Qe2 Qxe2+ </li>
+                        <li>Bxe2 Nf6 </li>
+                        <li>O-O g6 </li>
+                        <li>d3 Bg7 </li>
+                        <li>Nb5 Na6 </li>
+                        <li>1Bf4 O-O </li>
+                        <li>1d4 Bd7 </li>
+                        <li>1dxc5 Bxb5 </li>
+                        <li>1Bxb5 Nxc5 </li>
+                        <li>1 Be3 Ne6 </li>
+                        <li>1Nd4 a6 </li>
+                        <li>1Bd3 Nxd4 </li>
+                        <li>1Bxd4 Rad8 </li>
+                        <li>1Bb6 Rd6 </li>
+                        <li>1Bc5 Rd7 </li>
+                        <li>2Rfe1 Re8 </li>
+                        <li>2c3 Nd5 </li>
+                        <li>2Bc2 Rc7 </li>
+                        <li>2Ba3 b5 </li>
+                        <li>2Rad1 Rd7 </li>
+                        <li>2c4 e6 </li>
+                        <li>2cxd5 exd5 </li>
+                        <li>2Rxe8+ Bf8 </li>
+                                                
+                        </ol>                    
+
+                </div>
 
                 <p><hr></p>
 
@@ -96,14 +98,25 @@
                     <img src='../static/images/pawn-black.png' />
                 </div>
 
-                
+            
 
+            </div>
+
+
+            <div class="split right" >
+                <table id="gameboard"></table>
             </div>
 
         </div>
 
 
-    <footer>Created by <a href='https://github.com/BNwike47'>Barry Nwike</a> and <a href='https://github.com/cqnykamp'>Charles Nykamp</a> for Carleton College Software Design Class, Fall 2022</footer>
+        <!-- <table>
+            <tr><td>hey</td><td>wazzup</td></tr>
+            <tr><td>hey</td><td>wazzup</td></tr>
+        </table> -->
+
+
+        <footer>Created by <a href='https://github.com/BNwike47'>Barry Nwike</a> and <a href='https://github.com/cqnykamp'>Charles Nykamp</a> for Carleton College Software Design Class, Fall 2022</footer>
 
 
     </body>
