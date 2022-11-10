@@ -21,8 +21,8 @@ body{
     /* background-color: #f2f2f2; */
 
     /* These exist so that page contents don't overlap with the navbar and footer */
-    margin-top: 10vh;
-    margin-bottom: 5vh;
+    margin-top: 5em;
+    margin-bottom: 20em;
 
     /* font-family: fantasy; */
 }
@@ -52,7 +52,7 @@ nav {
     left: 0;
     top: 0;
     right: 0;
-    height: 6vh;
+    height: 1.5em;
 
     /* background-color: #04AA6D; */
     background-color: #0b5091;
@@ -68,19 +68,22 @@ nav a {
 }
 
 nav img {
-    height: 4vh;
+    height: 1em;
+    padding-left: 1vw;
+    padding-right: 0.5vw;
+    /* padding-top: 0.3vh; */
 }
 
 
 
 footer{
-    position: absolute;
+    position: relative;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 3vh;
+    height: 2em;
 
-    margin: 2vh;
+    margin: 0.5em;
 
     text-align: center;
     font-style: italic;
