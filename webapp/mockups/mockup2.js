@@ -104,12 +104,11 @@ function draw() {
 
     chessNotationToIndex('c4');
 
-    let gameHeading = document.getElementById("game-heading");
-
     let board = initialBoardPosition();
 
+    
     let gameboard = document.getElementById("gameboard");
-    console.log(gameboard);
+    // console.log(gameboard);
 
     // let screenHeight = document.body.clientHeight;
     // let screenWidth = document.body.clientWidth;
@@ -142,10 +141,16 @@ function draw() {
             let squareColor = ((row + col) % 2 == 1) ? 'white-square' : 'black-square';
 
             rowHtml += `<td id='square_${row}_${col}'
-                class="game-square ${squareColor}"
+                class="${squareColor}"
                 style="width: ${squareSize}px; height: ${squareSize}px;">
                     ${possibleImage}
             </td>`;
+
+            // rowHtml += `<td id='square_${row}_${col}'
+            //     class="${squareColor}"
+            //         ${possibleImage}
+            // </td>`;
+
         }
         rowHtml += `</tr>`;
         squares = rowHtml + squares;

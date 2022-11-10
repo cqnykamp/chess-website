@@ -9,8 +9,8 @@ body{
     background-color: lightgreen;
     /* background-color:#f1f1f1; */
     padding-top: 6vh;
-    
-    font-family: fantasy;
+
+    /* font-family: fantasy; */
 }
 
 input{
@@ -25,7 +25,9 @@ input:focus {
     margin-right: 78%;
 }
 button {
-    background-color: #04AA6D;
+    /* background-color: #04AA6D; */
+    background-color: #0b5091;
+
     width: 80px;
     height: 60px;
     font-family: fantasy;
@@ -69,9 +71,9 @@ h1{
     object-fit: contain;
 }
 
-li{
+/* li{
     margin-bottom: 10px;
-}
+} */
 
 li img{
     float: left;
@@ -88,14 +90,15 @@ nav {
     right: 0;
     height: 6vh;
 
-    background-color: #04AA6D;
+    /* background-color: #04AA6D; */
+    background-color: #0b5091;
+
+
     color: white;
 
     vertical-align: middle;
 
-    font-size: 4vh;
-    /* font-family: Arial, Helvetica, sans-serif; */
-    /* font-weight: bolder; */
+    font-size: xx-large;
 }
 
 nav a {
@@ -112,7 +115,7 @@ nav img {
 }
 
 footer {
-    margin-top: 12vh;
+    margin-top: 3vh;
     margin-bottom: 0vh;
     padding-bottom: 0vh;
     height: 3vh;

@@ -28,52 +28,49 @@ Final Project CS257 F22
 
 .container {
     display: flex;
-    /* flex-direction: row; */
-    /* flex-grow: 1px; */
-    /* flex-shrink: 1px; */
-    /* flex-basis: 0px; */
     flex-wrap: wrap;
-
-
-    margin-left: 4vw;
 }
+
+
 
 .left {
     width: 45vw;
 }
 
-/* .container > div {
-    margin-top: 2vh;
-    margin-right: 1vw;
-    margin-bottom: 0vh;
-} */
-
-
-
-
-.game-square {
-    user-select: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.black-square {
-    background-color: grey;
-}
-
-.white-square {
+.panel {
     background-color: white;
+    margin: 1vw;
+    padding: 0.5vw;
 }
 
-.game-square img {
-    width: 80%;
-    height: 80%;
-    object-fit: contain;
+.panel h3 {
+    margin-top: 0vw;
 }
 
-#gameboard tr {
+
+
+
+#turn-panel {
     display: flex;
+}
+
+#turn-panel > * {
+    margin-right: 2vw;
+}
+
+
+
+
+
+#moves-panel ol {
+    column-count: 3;
+}
+
+
+#moves-panel button {
+    width: 49%;
+    /* height: 3em; */
+    cursor: pointer;
 }
 
 
@@ -84,50 +81,35 @@ Final Project CS257 F22
 
 
 .captured img {
-    width: 5vh;
-    height: 5vh;
+    width: 2em;
+    height: 2em;
     object-fit: contain;
 }
 
 
 
-
-#info-panel {
-    /* box-sizing: border-box; */
-    /* border-width: 1wh;
-    border-color: black; */
-    /* border: solid; */
-    /* padding-left: 1vw;
-    padding-top: 0vh; */
+#gameboard tr {
+    display: flex;
 }
 
-#moves-panel ol {
-    /* display: flex; */
-    /* flex-wrap: wrap; */
-    column-count: 3;
+#gameboard td {
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#moves-panel li {
-    /* display: inline-flex; */
-    padding: 0px;
-    margin: 0px;
+#gameboard td img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
 }
 
-#game-viewer button {
-    width: 49%;
-    height: 3em;
-    cursor: pointer;
+
+.black-square {
+    background-color: grey;
 }
 
-/* #gameboard {
-    margin-bottom: 2vh;
-    border-width: 2wh;
-    border-color: black;
-    border-style: inset;
-} */
-
-
-
-hr {
-    border-color: black;
+.white-square {
+    background-color: white;
 }

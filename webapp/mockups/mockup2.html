@@ -36,14 +36,17 @@
 
             <div class='split left'>
 
-                <h3>Turn: 3</h3>
-
-                <button>&#9668; Back</button>
-                <button>Forward &#9658;</button>
+                <div id='turn-panel' class="panel">
+                    <h3>Turn: 3 Next: White</h3>
+                    
+                    <button>&#9668; Back</button>
+                    <button>Forward &#9658;</button>
+    
+                </div>
                 
-                <div id="moves-panel">
+                <div id="moves-panel" class="panel">
 
-                    Moves: 
+                    <h3>Moves:</h3>
                         <ol>
                         <li>e4 c5 </li>
                         <li>Nf3 d5 </li>
@@ -54,48 +57,50 @@
                         <li>O-O g6 </li>
                         <li>d3 Bg7 </li>
                         <li>Nb5 Na6 </li>
-                        <li>1Bf4 O-O </li>
-                        <li>1d4 Bd7 </li>
-                        <li>1dxc5 Bxb5 </li>
-                        <li>1Bxb5 Nxc5 </li>
-                        <li>1 Be3 Ne6 </li>
-                        <li>1Nd4 a6 </li>
-                        <li>1Bd3 Nxd4 </li>
-                        <li>1Bxd4 Rad8 </li>
-                        <li>1Bb6 Rd6 </li>
-                        <li>1Bc5 Rd7 </li>
-                        <li>2Rfe1 Re8 </li>
-                        <li>2c3 Nd5 </li>
-                        <li>2Bc2 Rc7 </li>
-                        <li>2Ba3 b5 </li>
-                        <li>2Rad1 Rd7 </li>
-                        <li>2c4 e6 </li>
-                        <li>2cxd5 exd5 </li>
-                        <li>2Rxe8+ Bf8 </li>
+                        <li>Bf4 O-O </li>
+                        <li>d4 Bd7 </li>
+                        <li>dxc5 Bxb5 </li>
+                        <li>Bxb5 Nxc5 </li>
+                        <li>Be3 Ne6 </li>
+                        <li>Nd4 a6 </li>
+                        <li>Bd3 Nxd4 </li>
+                        <li>Bxd4 Rad8 </li>
+                        <li>Bb6 Rd6 </li>
+                        <li>Bc5 Rd7 </li>
+                        <li>Rfe1 Re8 </li>
+                        <li>c3 Nd5 </li>
+                        <li>Bc2 Rc7 </li>
+                        <li>Ba3 b5 </li>
+                        <li>Rad1 Rd7 </li>
+                        <li>c4 e6 </li>
+                        <li>cxd5 exd5 </li>
+                        <li>Rxe8+ Bf8 </li>
                                                 
                         </ol>                    
 
                 </div>
 
-                <p><hr></p>
-
-
-                <h3>Captured</h3>
-
-                <div class='captured'>
-                    <img src='../static/images/pawn-white.png' />
-                    <img src='../static/images/knight-white.png' />
-                    <img src='../static/images/pawn-white.png' />
-                    <img src='../static/images/pawn-white.png' />
-                    <img src='../static/images/queen-white.png' />
+                
+                <div class="panel">
                     
-                </div>
+                    <h3>Captured</h3>
 
-
-                <div class='captured'>
-                    <img src='../static/images/bishop-black.png' />
-                    <img src='../static/images/pawn-black.png' />
-                    <img src='../static/images/pawn-black.png' />
+                    <div class='captured'>
+                        <img src='../static/images/pawn-white.png' />
+                        <img src='../static/images/knight-white.png' />
+                        <img src='../static/images/pawn-white.png' />
+                        <img src='../static/images/pawn-white.png' />
+                        <img src='../static/images/queen-white.png' />
+                        
+                    </div>
+    
+    
+                    <div class='captured'>
+                        <img src='../static/images/bishop-black.png' />
+                        <img src='../static/images/pawn-black.png' />
+                        <img src='../static/images/pawn-black.png' />
+                    </div>
+    
                 </div>
 
             
