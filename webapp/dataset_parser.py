@@ -64,7 +64,7 @@ def main():
 
 
             # Write one game to our csv
-            games_writer.writerow([game_id, white_user_id, black_user_id, turns, moves, white_rating, black_rating, victory_status, winner, opening_id, increment_code]) 
+            games_writer.writerow([game_id, white_user_id, black_user_id, turns, moves, white_rating, black_rating, victory_status, winner, rated_status, opening_id, increment_code]) 
             
 
         users_writer = csv.writer(users_csv)

@@ -1,17 +1,17 @@
 
-CREATE TABLE users(
-    id SERIAL,
-    username text,
+CREATE TABLE users (
+    id int,
+    username text
 );
 
 
-CREATE TABLE openings(
-    id SERIAL,
-    opening_name text,
+CREATE TABLE openings (
+    id int,
+    opening_name text
 );
 
 
-CREATE TABLE games(
+CREATE TABLE games (
     id text,
     white_player_id integer,
     black_player_id integer,
@@ -23,5 +23,5 @@ CREATE TABLE games(
     winner text,
     rated_status boolean,
     opening_id integer,
-    increment_code text,
+    increment_code text
 );
