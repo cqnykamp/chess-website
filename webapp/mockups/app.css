@@ -3,15 +3,125 @@ Authors: Barry Nwike and Charles Nykamp
 Final Project CS257 F22
  */
 
+
+
+/**
+    ======= General  =======
+**/
+
+html {
+    min-height: 100%; /* ensure that the footer remains at the bottom of the page */
+}
+
+  
 body{
-    padding-top: 7vh;
     /* background-color: #161b22; */
     background-color: lightgreen;
     /* background-color:#f1f1f1; */
-    padding-top: 6vh;
+    /* background-color: #f2f2f2; */
+
+    /* These exist so that page contents don't overlap with the navbar and footer */
+    margin-top: 10vh;
+    margin-bottom: 5vh;
 
     /* font-family: fantasy; */
 }
+
+
+button {
+    /* background-color: #04AA6D; */
+    background-color: #0b5091;
+
+    width: 80px;
+    height: 60px;
+    font-family: fantasy;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+
+
+/**
+   ======= Navbar and footer =======
+**/
+
+nav {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 6vh;
+
+    /* background-color: #04AA6D; */
+    background-color: #0b5091;
+    color: white;
+
+    vertical-align: middle;
+    font-size: xx-large;
+}
+
+nav a {
+    color: inherit;
+    text-decoration: none;
+}
+
+nav img {
+    height: 4vh;
+}
+
+
+
+footer{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3vh;
+
+    margin: 2vh;
+
+    text-align: center;
+    font-style: italic;
+}
+
+
+
+/**
+    ======= Side-by-side and panels =======
+**/
+
+
+.centered {
+    max-width: fit-content;
+    margin: 0 auto;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.split {
+    margin-right: 1vw;
+}
+
+.panel {
+    background-color: white;
+    margin-bottom: 2vh;
+    padding: 0.5vw;
+}   
+
+.panel h3 {
+    margin-top: 0vw;
+}
+
+
+
+/**
+    ======= Homepage specific =======
+**/
 
 input{
     transition: width 0.4s ease-in-out;
@@ -23,20 +133,6 @@ input:focus {
 .search{
     text-align: center;
     margin-right: 78%;
-}
-button {
-    /* background-color: #04AA6D; */
-    background-color: #0b5091;
-
-    width: 80px;
-    height: 60px;
-    font-family: fantasy;
-    color: white;
-    cursor: pointer;
-}
-h1{
-    text-align: left;
-    margin-left: 50px;
 }
 
 .pageelements{
@@ -83,44 +179,94 @@ li img{
     object-fit: contain;
 }
 
-nav {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    height: 6vh;
 
-    /* background-color: #04AA6D; */
-    background-color: #0b5091;
-
-
-    color: white;
-
-    vertical-align: middle;
-
-    font-size: xx-large;
-}
-
-nav a {
-    color: inherit;
-    text-decoration: none;
-}
-
-nav img {
-    height: 4vh;
-}
 
 .games{
     margin-bottom: 10px;
 }
 
-footer {
-    margin-top: 3vh;
-    margin-bottom: 0vh;
-    padding-bottom: 0vh;
-    height: 3vh;
-    text-align: center;
+
+
+
+
+
+/**
+    ======= Game viewer specific =======
+**/
+
+
+.player {
+    display: inline-block;
+}
+
+.player .player-name {
     font-style: italic;
 }
 
+.player .player-rating {
+    font-size: large;
+    vertical-align: bottom; 
+}
 
+.player img {
+    width: 1em;
+    height: 1em;
+    object-fit: contain;
+}
+
+
+
+#moves-panel ol {
+    column-count: 3;
+    column-gap: 7em;
+}
+
+#moves-panel button {
+    width: 49%;
+    /* height: 3em; */
+    cursor: pointer;
+}
+
+
+.captured {
+    display: flex;    
+}
+
+.captured img {
+    width: 2em;
+    height: 2em;
+    object-fit: contain;
+}
+
+
+
+
+/**
+    ======= Chess gameboard =======
+**/
+
+#gameboard tr {
+    display: flex;
+}
+
+#gameboard td {
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#gameboard td img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+}
+
+
+.black-square {
+    background-color: grey;
+}
+
+.white-square {
+    background-color: white;
+}

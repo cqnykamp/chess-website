@@ -1,5 +1,4 @@
 
-
 const boardScreenHeightUsage = 0.65;
 
 // The gameboard should never take up more than this percentage of the
@@ -106,7 +105,7 @@ function draw() {
 
     let board = initialBoardPosition();
 
-    
+
     let gameboard = document.getElementById("gameboard");
     // console.log(gameboard);
 
