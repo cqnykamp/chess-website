@@ -1,3 +1,8 @@
+'''
+Charles Nykamp and Barry Nwike
+Carleton College Software Design Class, Fall 2022
+'''
+
 
 import flask
 import api

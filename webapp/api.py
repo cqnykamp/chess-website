@@ -1,3 +1,8 @@
+'''
+Charles Nykamp and Barry Nwike
+Carleton College Software Design Class, Fall 2022
+'''
+
 
 import flask
 import json
@@ -21,7 +26,13 @@ def get_connection():
 def get_games_list():
 
     query = '''
-        SELECT white_player_id, black_player_id FROM games LIMIT 5;
+        SELECT users_white.username, users_black.username
+        FROM games
+        LEFT OUTER JOIN users AS users_white
+        ON users_white.id = games.white_player_id
+        LEFT OUTER JOIN users AS users_black
+        ON users_black.id = games.black_player_id
+        LIMIT 10;
     '''
 
     games_list = []
