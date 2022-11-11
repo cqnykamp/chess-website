@@ -4,6 +4,7 @@ Carleton College Software Design Class, Fall 2022
 '''
 
 
+import sys
 import flask
 import json
 import psycopg2
@@ -50,3 +51,43 @@ def get_games_list():
         print(e, file=sys.stderr)
 
     return json.dumps(games_list)
+
+
+@api.route('/game/<game_id>/')
+def get_game(game_id):
+
+    query = '''
+        SELECT users_white.username, users_black.username, games.moves
+        FROM games
+        LEFT OUTER JOIN users AS users_white
+        ON users_white.id = games.white_player_id
+        LEFT OUTER JOIN users AS users_black
+        ON users_black.id = games.black_player_id
+        WHERE games.id = %s;
+    '''
+
+    game_data = {}
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute(query, (game_id,))
+
+        
+        result = cursor.fetchone()
+        if result:
+            [white_username, black_username, moves] = result
+            game_data = {
+                'white_username': white_username,
+                'black_username': black_username,
+                'moves': moves,
+            }
+        else:
+            print('There is no game for this id')
+
+        cursor.close()
+        connection.close()
+    except Exception as e:
+        print(e, file=sys.stderr)
+
+    return json.dumps(game_data)
+
