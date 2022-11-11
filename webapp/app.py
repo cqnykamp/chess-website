@@ -35,7 +35,11 @@ def game(game_id):
     #     'turns': 4,
     # }
 
-    return flask.render_template('game.html', game_data=game_data)
+    if 'moves' in game_data:
+        # We assume that there is a game with this id
+        return flask.render_template('game.html', game_data=game_data)
+    else:
+        return flask.render_template('no_game_found.html')
 
 
 if __name__ == '__main__':

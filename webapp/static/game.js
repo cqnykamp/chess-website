@@ -5,6 +5,14 @@ const boardScreenHeightUsage = 0.65;
 // screen width
 const boardMaxScreenWidthUsage = 0.8;
 
+function getStaticFolderURL() {
+    let staticFolderURL = window.location.protocol
+                    + '//' + window.location.hostname
+                    + ':' + window.location.port
+                    + '/static';
+    return staticFolderURL;
+}
+
 
 function initialBoardPosition() {
     let board = Array.from({ length: 8 }, () => 
@@ -132,7 +140,7 @@ function draw() {
             
             let possibleImage = "";
             if(board[row][col] != "") {
-                possibleImage = `<img src='../static/images/${board[row][col]}.png' />`;
+                possibleImage = `<img src='${getStaticFolderURL()}/images/${board[row][col]}.png' />`;
 
             }
 
