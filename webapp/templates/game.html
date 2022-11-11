@@ -8,11 +8,6 @@
 
 {% block content %}
 
-<p>
-    From api: {{ game_data }}
-
-</p>
-
 <div class="centered">
 
     <h1>
@@ -32,11 +27,15 @@
         </div>
     </h1>
 
-    <p>Winner: {{ game_data.winner }} by {{ game_data.victory_status }}</p>
-
     <div class='container'>
 
         <div class='split'>
+
+            <div class="panel">
+                <b>Winner:</b> {{ game_data.winner }}<br/>
+                <b>Victory status:</b> {{ game_data.victory_status }}<br/>
+                <b>Opening:</b> {{ game_data.opening_name }}<br/>
+            </div>
 
             <div id='turn-panel' class="panel">
                 <h3>Turn: 3/{{ game_data.turns }}</h3>
@@ -49,39 +48,7 @@
             <div id="moves-panel" class="panel">
 
                 <h3>Moves:</h3>
-                <p>{{ game_data.moves }}</p>
-
-                <h3>Moves:</h3>
-                    <ol>
-                    <li>e4 c5 </li>
-                    <li>Nf3 d5 </li>
-                    <li>exd5 Qxd5 </li>
-                    <li>Nc3 Qe6+ </li>
-                    <li>Qe2 Qxe2+ </li>
-                    <li>Bxe2 Nf6 </li>
-                    <li>O-O g6 </li>
-                    <li>d3 Bg7 </li>
-                    <li>Nb5 Na6 </li>
-                    <li>Bf4 O-O </li>
-                    <li>d4 Bd7 </li>
-                    <li>dxc5 Bxb5 </li>
-                    <li>Bxb5 Nxc5 </li>
-                    <li>Be3 Ne6 </li>
-                    <li>Nd4 a6 </li>
-                    <li>Bd3 Nxd4 </li>
-                    <li>Bxd4 Rad8 </li>
-                    <li>Bb6 Rd6 </li>
-                    <li>Bc5 Rd7 </li>
-                    <li>Rfe1 Re8 </li>
-                    <li>c3 Nd5 </li>
-                    <li>Bc2 Rc7 </li>
-                    <li>Ba3 b5 </li>
-                    <li>Rad1 Rd7 </li>
-                    <li>c4 e6 </li>
-                    <li>cxd5 exd5 </li>
-                    <li>Rxe8+ Bf8 </li>
-                                            
-                    </ol>
+                <div id="moves-list">{{ game_data.moves }}</div>
 
             </div>
 

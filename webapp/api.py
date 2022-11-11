@@ -8,6 +8,7 @@ import sys
 import flask
 import json
 import psycopg2
+import chess
 import config
 
 api = flask.Blueprint('api', __name__)
@@ -57,12 +58,14 @@ def get_games_list():
 def get_game(game_id):
 
     query = '''
-        SELECT users_white.username, users_black.username, games.moves
+        SELECT users_white.username, games.white_player_rating, users_black.username, games.black_player_rating, games.turns, games.victory_status, games.winner, games.rated_status, games.moves, openings.opening_name, games.increment_code
         FROM games
         LEFT OUTER JOIN users AS users_white
         ON users_white.id = games.white_player_id
         LEFT OUTER JOIN users AS users_black
         ON users_black.id = games.black_player_id
+        LEFT OUTER JOIN openings
+        ON openings.id = games.opening_id
         WHERE games.id = %s;
     '''
 
@@ -72,14 +75,22 @@ def get_game(game_id):
         cursor = connection.cursor()
         cursor.execute(query, (game_id,))
 
-        
+
         result = cursor.fetchone()
         if result:
-            [white_username, black_username, moves] = result
+            [white_username, white_rating, black_username, black_rating, turns, victory_status, winner, rated_status, moves, opening_name, increment_code] = result
             game_data = {
                 'white_username': white_username,
+                'white_rating': white_rating,
                 'black_username': black_username,
+                'black_rating': black_rating,
+                'turns': turns,
+                'victory_status': victory_status,
+                'winner': winner,
+                'rated_status': rated_status,
                 'moves': moves,
+                'opening_name': opening_name,
+                'increment_code': increment_code,
             }
         else:
             print('There is no game for this id')

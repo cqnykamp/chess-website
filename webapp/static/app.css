@@ -15,10 +15,7 @@ html {
 
   
 body{
-    /* background-color: #161b22; */
     background-color: lightgreen;
-    /* background-color:#f1f1f1; */
-    /* background-color: #f2f2f2; */
 
     /* These exist so that page contents don't overlap with the navbar and footer */
     margin-top: 5em;
@@ -56,6 +53,7 @@ nav {
 
     /* background-color: #04AA6D; */
     background-color: #0b5091;
+    /* background-color: darkgreen; */
     color: white;
 
     vertical-align: middle;

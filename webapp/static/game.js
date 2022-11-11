@@ -92,7 +92,7 @@ function chessNotationToIndex(move) {
     let rowNum = move[1];
     let extra = move.substring(2);
 
-    console.log(`Column: ${colLetter} row: ${rowNum} extra: ${extra}`);
+    // console.log(`Column: ${colLetter} row: ${rowNum} extra: ${extra}`);
 
     return (colLetterToIndex[colLetter], Number(rowNum), extra);
 }
@@ -101,6 +101,22 @@ function chessNotationToIndex(move) {
 function boardPositionFrom(moves) {
     let board = initialBoardPosition();
 
+}
+
+
+function loadPage() {
+
+    let moves_elem = document.getElementById("moves-list");
+    
+    let moves_formatted = "<ol>";
+    for(let move of moves_elem.innerHTML.split(" ")) {
+        moves_formatted += `<li>${move}</li>`;
+    }
+    moves_formatted += "</ol>";
+
+    moves_elem.innerHTML = moves_formatted;
+
+    draw();
 }
 
 
@@ -121,7 +137,7 @@ function draw() {
     let screenHeight = window.innerHeight;
     let screenWidth = window.innerWidth;
 
-    console.log(`Screen size is ${screenWidth} wide and ${screenHeight} tall`);
+    // console.log(`Screen size is ${screenWidth} wide and ${screenHeight} tall`);
 
     let heightConstraint = screenHeight * boardScreenHeightUsage;
     let widthConstraint = screenWidth * boardMaxScreenWidthUsage;
@@ -129,7 +145,7 @@ function draw() {
     let boardSize = Math.min(widthConstraint, heightConstraint);
 
     let squareSize = boardSize / 8;
-    console.log(`Square size is ${squareSize}`);
+    // console.log(`Square size is ${squareSize}`);
 
 
     let squares = "";
@@ -165,5 +181,5 @@ function draw() {
     gameboard.innerHTML = squares;
 }
 
-window.onload = draw;
-window.onresize = () => draw();
+window.onload = loadPage;
+window.onresize = draw;
