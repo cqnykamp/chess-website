@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Analychess</title>
+        <meta charset='UTF-8'>
+        <link rel="icon" href="{{ url_for('static', filename='/images/king-white.png') }}" type="image/icon type">
+        <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='app.css') }}" />
+    </head>
+
+    {% block head_extension %}
+    {% endblock %}
+    
+    <body>
+
+        <nav><a href="/"><img src="{{ url_for('static', filename='images/king-white.png') }}"/>Analychess</a></nav>
+
+        {% block content %}
+        {% endblock %}
+
+        <footer>Created by <a href='https://github.com/BNwike47'>Barry Nwike</a> and <a href='https://github.com/cqnykamp'>Charles Nykamp</a> for Carleton College Software Design Class, Fall 2022</footer>
+
+
+    </body>
+
+</html>
