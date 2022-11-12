@@ -16,8 +16,10 @@
 
         <nav><a href="/"><img src="{{ url_for('static', filename='images/king-white.png') }}"/>Analychess</a></nav>
 
+        <div class="main-content">
         {% block content %}
         {% endblock %}
+        </div>
 
         <footer>Created by <a href='https://github.com/BNwike47'>Barry Nwike</a> and <a href='https://github.com/cqnykamp'>Charles Nykamp</a> for Carleton College Software Design Class, Fall 2022</footer>
 

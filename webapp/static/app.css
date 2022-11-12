@@ -9,19 +9,21 @@ Final Project CS257 F22
     ======= General  =======
 **/
 
-html {
-    min-height: 100%; /* ensure that the footer remains at the bottom of the page */
-}
-
   
 body{
     background-color: lightgreen;
 
-    /* These exist so that page contents don't overlap with the navbar and footer */
-    margin-top: 5em;
-    margin-bottom: 20em;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 
     /* font-family: fantasy; */
+}
+
+.main-content {
+    flex: 1;
 }
 
 
@@ -45,7 +47,6 @@ button {
 **/
 
 nav {
-    position: absolute;
     left: 0;
     top: 0;
     right: 0;
@@ -54,9 +55,8 @@ nav {
     /* background-color: #04AA6D; */
     background-color: #0b5091;
     /* background-color: darkgreen; */
-    color: white;
 
-    vertical-align: middle;
+    color: white;
     font-size: xx-large;
 }
 
@@ -75,13 +75,13 @@ nav img {
 
 
 footer{
-    position: relative;
+    /* position: absolute;
     bottom: 0;
     left: 0;
-    right: 0;
-    height: 2em;
+    right: 0; */
 
-    margin: 0.5em;
+    height: 2em;
+    margin-top: 1em;
 
     text-align: center;
     font-style: italic;
@@ -116,6 +116,17 @@ footer{
 
 .panel h3 {
     margin-top: 0vw;
+}
+
+
+.extra-padding {
+    padding: 2vw;
+}
+
+.vertically-centered-element {
+    display: flex;
+    align-items: center;
+    height: 60vh;
 }
 
 
