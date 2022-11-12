@@ -79,6 +79,16 @@ def get_game(game_id):
         result = cursor.fetchone()
         if result:
             [white_username, white_rating, black_username, black_rating, turns, victory_status, winner, rated_status, moves, opening_name, increment_code] = result
+
+            board = chess.Board()
+            board_positions = []
+
+            board_positions.append(str(board).replace(" ", "").replace('\n', "/"))
+            for move in moves.split(" "):
+                board.push_san(move)
+                board_positions.append(str(board).replace(" ", "").replace('\n', "/"))
+
+
             game_data = {
                 'white_username': white_username,
                 'white_rating': white_rating,
@@ -91,6 +101,8 @@ def get_game(game_id):
                 'moves': moves,
                 'opening_name': opening_name,
                 'increment_code': increment_code,
+
+                'board_positions': board_positions
             }
         else:
             print('There is no game for this id')

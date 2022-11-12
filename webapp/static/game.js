@@ -5,6 +5,9 @@ const boardScreenHeightUsage = 0.65;
 // screen width
 const boardMaxScreenWidthUsage = 0.8;
 
+var currentTurn = 1;
+
+
 function getStaticFolderURL() {
     let staticFolderURL = window.location.protocol
                     + '//' + window.location.hostname
@@ -100,7 +103,6 @@ function chessNotationToIndex(move) {
 
 function boardPositionFrom(moves) {
     let board = initialBoardPosition();
-
 }
 
 
@@ -116,27 +118,47 @@ function loadPage() {
 
     moves_elem.innerHTML = moves_formatted;
 
-    draw();
+
+
+    // console.log(boardPositions)
+
+
+    drawBoard();
+}
+
+
+function symbolToImageName(symbol) {
+    switch(symbol) {
+        case 'P': return 'pawn-white';
+        case 'R': return 'rook-white';
+        case 'N': return 'knight-white';
+        case 'B': return 'bishop-white';
+        case 'Q': return 'queen-white';
+        case 'K': return 'king-white';
+        case 'p': return 'pawn-black';
+        case 'r': return 'rook-black';
+        case 'n': return 'knight-black';
+        case 'b': return 'bishop-black';
+        case 'q': return 'queen-black';
+        case 'k': return 'king-black';
+
+        default: return null;
+    }
 }
 
 
 
-function draw() {
+function drawBoard() {
 
-
-    chessNotationToIndex('c4');
-
-    let board = initialBoardPosition();
+    // let board = initialBoardPosition();
 
 
     let gameboard = document.getElementById("gameboard");
-    // console.log(gameboard);
 
     // let screenHeight = document.body.clientHeight;
     // let screenWidth = document.body.clientWidth;
     let screenHeight = window.innerHeight;
     let screenWidth = window.innerWidth;
-
     // console.log(`Screen size is ${screenWidth} wide and ${screenHeight} tall`);
 
     let heightConstraint = screenHeight * boardScreenHeightUsage;
@@ -148,6 +170,8 @@ function draw() {
     // console.log(`Square size is ${squareSize}`);
 
 
+    let board = boardPositions[currentTurn-1].split("/");
+
     let squares = "";
     for(let row=0; row<board.length; row++) {
         let rowHtml = `<tr class="board_row">`;
@@ -155,11 +179,12 @@ function draw() {
         for(let col=0; col<board[0].length; col++) {
             
             let possibleImage = "";
-            if(board[row][col] != "") {
-                possibleImage = `<img src='${getStaticFolderURL()}/images/${board[row][col]}.png' />`;
+            let pieceName = symbolToImageName(board[row][col]);
 
+            if(pieceName != null) {
+                possibleImage = `<img src='${getStaticFolderURL()}/images/${pieceName}.png' />`;
             }
-
+            
             let squareColor = ((row + col) % 2 == 1) ? 'white-square' : 'black-square';
 
             rowHtml += `<td id='square_${row}_${col}'
@@ -168,18 +193,40 @@ function draw() {
                     ${possibleImage}
             </td>`;
 
-            // rowHtml += `<td id='square_${row}_${col}'
-            //     class="${squareColor}"
-            //         ${possibleImage}
-            // </td>`;
-
         }
         rowHtml += `</tr>`;
-        squares = rowHtml + squares;
+        squares += rowHtml;
     }
 
     gameboard.innerHTML = squares;
 }
 
+//remember currentTurn is 1-indexed 
+
+function nextTurn() {
+    if(currentTurn < boardPositions.length - 1) {
+        currentTurn += 1;
+        document.getElementById("turn-counter").innerHTML = currentTurn;
+        drawBoard()
+    }
+}
+
+function previousTurn() {
+    if(currentTurn > 1) {
+        currentTurn -= 1;
+        document.getElementById("turn-counter").innerHTML = currentTurn;
+        drawBoard()
+    }
+}
+
+
 window.onload = loadPage;
-window.onresize = draw;
+window.onresize = drawBoard;
+
+document.onkeydown = function(event) {
+    if(event.key == "ArrowLeft") {
+        previousTurn()
+    } else if(event.key == "ArrowRight") {
+        nextTurn()
+    }
+}

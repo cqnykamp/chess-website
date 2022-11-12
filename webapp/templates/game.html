@@ -1,6 +1,10 @@
 {% extends "layout.html" %}
 
 {% block head_extension %}
+<script>
+    var boardPositions = JSON.parse('{{ game_data.board_positions|tojson }}');
+</script>
+
 <script type='text/javascript' src="{{ url_for('static', filename='game.js') }}"></script>
 {% endblock %}
 
@@ -38,10 +42,10 @@
             </div>
 
             <div id='turn-panel' class="panel">
-                <h3>Turn: 3/{{ game_data.turns }}</h3>
+                <h3>Turn: <span id="turn-counter">1</span>/{{ game_data.turns }}</h3>
                 
-                <button>&#9668; Back</button>
-                <button>Forward &#9658;</button>
+                <button onclick="previousTurn()">&#9668; Back</button>
+                <button onclick="nextTurn()">Forward &#9658;</button>
 
             </div>
             
@@ -76,7 +80,6 @@
         
 
         </div>
-
 
 
         <!-- <div class="split right panel" > -->
