@@ -3,11 +3,11 @@
 {% block head_extension %}
 <script>
     var boardPositions = JSON.parse('{{ game_data.board_positions|tojson }}');
+    var capturedPieces = JSON.parse('{{ game_data.captured_pieces|tojson }}');
 </script>
 
 <script type='text/javascript' src="{{ url_for('static', filename='game.js') }}"></script>
 {% endblock %}
-
 
 
 {% block content %}
@@ -40,18 +40,15 @@
                 <b>Victory status:</b> {{ game_data.victory_status }}<br/>
                 <b>Opening:</b> {{ game_data.opening_name }}<br/>
             </div>
-
-            <div id='turn-panel' class="panel">
-                <h3>Turn: <span id="turn-counter">1</span>/{{ game_data.turns }}</h3>
-                
-                <button onclick="previousTurn()">&#9668; Back</button>
-                <button onclick="nextTurn()">Forward &#9658;</button>
-
-            </div>
             
             <div id="moves-panel" class="panel">
 
-                <h3>Moves:</h3>
+                <div class="inline">
+                    <h3>Moves: <span id="turn-counter">0</span>/{{ game_data.turns }}</h3>
+                    <button onclick="previousTurn()">&#9668; Back</button>
+                    <button onclick="nextTurn()">Forward &#9658;</button>
+                </div>
+
                 <div id="moves-list">{{ game_data.moves }}</div>
 
             </div>
@@ -61,19 +58,19 @@
                 
                 <h3>Captured</h3>
 
-                <div class='captured'>
-                    <img src="{{ url_for('static', filename='images/pawn-white.png') }}" />
+                <div id='captured'>
+                    <!-- <img src="{{ url_for('static', filename='images/pawn-white.png') }}" />
                     <img src="{{ url_for('static', filename='images/knight-white.png') }}" />
                     <img src="{{ url_for('static', filename='images/pawn-white.png') }}" />
                     <img src="{{ url_for('static', filename='images/pawn-white.png') }}" />
-                    <img src="{{ url_for('static', filename='images/queen-white.png') }}" />
+                    <img src="{{ url_for('static', filename='images/queen-white.png') }}" /> -->
                     
                 </div>
 
 
-                <div class='captured'>
+                <!-- <div class='captured'>
                     <img src="{{ url_for('static', filename='images/bishop-black.png') }}" />
-                </div>
+                </div> -->
 
             </div>
 

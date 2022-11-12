@@ -31,8 +31,8 @@ button {
     /* background-color: #04AA6D; */
     background-color: #0b5091;
 
-    width: 80px;
-    height: 60px;
+    /* width: 80px; */
+    /* height: 60px; */
     font-family: fantasy;
     color: white;
     cursor: pointer;
@@ -106,6 +106,11 @@ footer{
 
 .split {
     margin-right: 1vw;
+}
+
+.inline {
+    display: flex;
+    flex-direction: row;
 }
 
 .panel {
@@ -228,23 +233,29 @@ li img{
 
 
 
+#moves-panel h3 {
+    flex: 2;
+}
+
+#moves-panel button {
+    /* width: 49%; */
+    /* height: 3em; */
+    flex: 1;
+    cursor: pointer;
+}
+
+
 #moves-panel ol {
     column-count: 3;
     column-gap: 7em;
 }
 
-#moves-panel button {
-    width: 49%;
-    /* height: 3em; */
-    cursor: pointer;
-}
 
-
-.captured {
+#captured {
     display: flex;    
 }
 
-.captured img {
+#captured img {
     width: 2em;
     height: 2em;
     object-fit: contain;

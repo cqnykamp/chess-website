@@ -82,11 +82,23 @@ def get_game(game_id):
 
             board = chess.Board()
             board_positions = []
+            captured = []
 
             board_positions.append(str(board).replace(" ", "").replace('\n', "/"))
-            for move in moves.split(" "):
-                board.push_san(move)
+            captured = []
+
+            for move_string in moves.split(" "):
+                move = board.parse_san(move_string)
+                print(f"Move is ${move}")
+
+                captured_piece = ""
+                if board.is_capture(move):
+                    captured_piece = board.piece_at(move.to_square).symbol()
+
+                board.push(move)
+                # board.push_san(move_string)
                 board_positions.append(str(board).replace(" ", "").replace('\n', "/"))
+                captured.append(captured_piece)
 
 
             game_data = {
@@ -102,7 +114,8 @@ def get_game(game_id):
                 'opening_name': opening_name,
                 'increment_code': increment_code,
 
-                'board_positions': board_positions
+                'board_positions': board_positions,
+                'captured_pieces': captured,
             }
         else:
             print('There is no game for this id')

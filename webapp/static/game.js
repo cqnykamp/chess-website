@@ -5,7 +5,7 @@ const boardScreenHeightUsage = 0.65;
 // screen width
 const boardMaxScreenWidthUsage = 0.8;
 
-var currentTurn = 1;
+var moveCount = 0;
 
 
 function getStaticFolderURL() {
@@ -68,44 +68,6 @@ function findMovingPiecePosition(move) {
 }
 
 
-var pieceLetterToName = {
-    'K': 'king',
-    'Q': 'queen',
-    'R': 'rook',
-    'B': 'bishop',
-    'N': 'knight',
-
-    // otherwise pawn
-}
-
-var colLetterToIndex = {
-    'a': 0,
-    'b': 1,
-    'c': 2,
-    'd': 3,
-    'e': 4,
-    'f': 5,
-    'g': 6,
-    'h': 7,
-};
-
-
-function chessNotationToIndex(move) {
-    let colLetter = move[0];
-    let rowNum = move[1];
-    let extra = move.substring(2);
-
-    // console.log(`Column: ${colLetter} row: ${rowNum} extra: ${extra}`);
-
-    return (colLetterToIndex[colLetter], Number(rowNum), extra);
-}
-
-
-function boardPositionFrom(moves) {
-    let board = initialBoardPosition();
-}
-
-
 function loadPage() {
 
     let moves_elem = document.getElementById("moves-list");
@@ -120,7 +82,7 @@ function loadPage() {
 
 
 
-    // console.log(boardPositions)
+    console.log(capturedPieces);
 
 
     drawBoard();
@@ -146,14 +108,15 @@ function symbolToImageName(symbol) {
     }
 }
 
+function chessPieceImageHTML(pieceName) {
+    return `<img src='${getStaticFolderURL()}/images/${pieceName}.png' />`;
+}
+
 
 
 function drawBoard() {
 
     // let board = initialBoardPosition();
-
-
-    let gameboard = document.getElementById("gameboard");
 
     // let screenHeight = document.body.clientHeight;
     // let screenWidth = document.body.clientWidth;
@@ -170,7 +133,7 @@ function drawBoard() {
     // console.log(`Square size is ${squareSize}`);
 
 
-    let board = boardPositions[currentTurn-1].split("/");
+    let board = boardPositions[moveCount].split("/");
 
     let squares = "";
     for(let row=0; row<board.length; row++) {
@@ -182,7 +145,7 @@ function drawBoard() {
             let pieceName = symbolToImageName(board[row][col]);
 
             if(pieceName != null) {
-                possibleImage = `<img src='${getStaticFolderURL()}/images/${pieceName}.png' />`;
+                possibleImage = chessPieceImageHTML(pieceName);
             }
             
             let squareColor = ((row + col) % 2 == 1) ? 'white-square' : 'black-square';
@@ -198,23 +161,45 @@ function drawBoard() {
         squares += rowHtml;
     }
 
-    gameboard.innerHTML = squares;
+
+    document.getElementById("gameboard").innerHTML = squares;
+
+
+
+
+    let currentCapturedPieces = "";
+    for(let i=0; i< moveCount; i++) {
+        currentCapturedPieces += capturedPieces[i];
+    }
+
+    let captured = ""
+
+    if(currentCapturedPieces == "") {
+        captured = "<em>None</em>";
+    } else {
+        for(let pieceSymbol of currentCapturedPieces) {
+            captured += chessPieceImageHTML(symbolToImageName(pieceSymbol));
+        }
+    }
+
+    document.getElementById("captured").innerHTML = captured;
+
 }
 
 //remember currentTurn is 1-indexed 
 
 function nextTurn() {
-    if(currentTurn < boardPositions.length - 1) {
-        currentTurn += 1;
-        document.getElementById("turn-counter").innerHTML = currentTurn;
+    if(moveCount < boardPositions.length) {
+        moveCount += 1;
+        document.getElementById("turn-counter").innerHTML = moveCount;
         drawBoard()
     }
 }
 
 function previousTurn() {
-    if(currentTurn > 1) {
-        currentTurn -= 1;
-        document.getElementById("turn-counter").innerHTML = currentTurn;
+    if(moveCount > 0) {
+        moveCount -= 1;
+        document.getElementById("turn-counter").innerHTML = moveCount;
         drawBoard()
     }
 }
