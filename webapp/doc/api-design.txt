@@ -11,7 +11,7 @@ GET Parameters:
 
     turns (Optional, default: infinity, default comparitor: =) -- returns games played with a certain number of turns
         can be modified with + or - to obtain a list of games with turns above (+) or below (-) the specified number
-    Ex: /gameslist?turns+15 *games with more than 15 turns*
+    Ex: /gameslist?turns=+15 *games with more than 15 turns*
 
     rating_max (Optional, default: 2000) --returns games where the highest rating of a player is below a given value
     Ex: /gameslist?rating_max=1600

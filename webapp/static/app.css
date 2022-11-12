@@ -184,9 +184,6 @@ input:focus {
     object-fit: contain;
 }
 
-/* li{
-    margin-bottom: 10px;
-} */
 
 li img{
     float: left;
@@ -195,8 +192,6 @@ li img{
     padding-right: 5px;
     object-fit: contain;
 }
-
-
 
 .games{
     margin-bottom: 10px;
@@ -260,8 +255,6 @@ li img{
     height: 2em;
     object-fit: contain;
 }
-
-
 
 
 /**
