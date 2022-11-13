@@ -1,68 +1,94 @@
 api-design
 Charles Nykamp and Barry Nwike
 
-Statements:
 
-REQUEST: /gameslist
-GET Parameters:
-    user (Optional, default:"") --case insensitive, returns games 
-        played by usernames containing the input text
-    Ex: /gameslist?user=avocado
-
-    turns (Optional, default: infinity, default comparitor: =) -- returns games played with a certain number of turns
-        can be modified with + or - to obtain a list of games with turns above (+) or below (-) the specified number
-    Ex: /gameslist?turns+15 *games with more than 15 turns*
-
-    rating_max (Optional, default: 2000) --returns games where the highest rating of a player is below a given value
-    Ex: /gameslist?rating_max=1600
-
-    rating_min (Optional, default: 400) --returns games where the highest rating of a player is above a given value
-    Ex /gameslist?rating_min=200
-
-    opening_moves (Optional, default: "") --returns a list of games where a given sequence of strings is played out at the beginning
-    Ex: /gameslist?opening_moves=d4c6kd7
-    
-    page_size (Optional, default: "")
-    
-    page_id (Optional, default: 1)
-    
-    
-
-RESPONSE: A JSON list of dictionaries, each of which represents the metadata of a particular game. Each dictionary will have
-the following fields:
-
-- game_id (TEXT) The id that our database uses to refer to this game
-- white_username (TEXT)
-- white_rating (INTEGER)
-- black_username (TEXT)
-- black_rating (INTEGER)
-- turns (INTEGER) the number of turns in the game
-- victory_status (TEXT) such as draw, outoftime, mate
-- winner (TEXT) either the value black or the value white
-
-This list will be sorted by the ranking of the higher player, descending
-
+This API has two different endpoints:
+1. An endpoint which returns the game data of a particular game id
+2. An endpoint that returns game metadatas of all games which fit search criteria
 
 
 REQUEST: /game/<game_id>
-    Returns a game page with the associated/given id
-Ex: /game/sdEksd4
+    Returns the game data of the given game_id
 
-RESPONSE: A JSON dictionary which represents the full data of a game. The dictionary will have
-the following fields:
+RESPONSE: A JSON dictionary of the game data. The dictionary fields are:
 
-- white_username (TEXT)
-- white_rating (INTEGER)
-- black_username (TEXT)
-- black_rating (INTEGER)
-- turns (INTEGER) the number of turns in the game
-- victory_status (TEXT) such as draw, outoftime, mate
-- winner (TEXT) either the value black or the value white
+    white_username -- (TEXT)
+    white_rating ---- (INTEGER)
+    black_username -- (TEXT)
+    black_rating ---- (INTEGER)
+    turns ----------- (INTEGER) the number of moves in the game
+    victory_status -- (TEXT) such as draw, outoftime, mate
+    winner ---------- (TEXT) one of three values: "black", "white", or "draw"
+    rated_status ---- (BOOLEAN) either the game is a rated match or not 
+    moves ----------- (TEXT) a string sequence of every move made in the game
+    opening_name ---- (TEXT) A string that gives the exact chess name of a specific sequence of opening moves
+    increment_code -- (TEXT) what the time rules were when the game was played. Ex: 15+2
+    board_positions - (LIST OF TEXT) the state of the board at every turn. Each element in the list is
+                        a 71-character-long string, where each character represents one square, except for
+                        slashes which indicate the end of the row. See below for a table of which
+                        characters correspond to which pieces.
+    captured_pieces - (LIST OF TEXT) the piece captured, if there was one, after each turn. Each element in
+                        the list is either a 1-character-long string or an empty string, if no piece was
+                        captured that turn. See below for a table of which characters correspond to which pieces.
 
-- rated_status(BOOLEAN) either the game is a rated match or not 
-- moves (TEXT) a string sequence of every move made in the game
-- opening_name (TEXT) A string that gives the exact chess name of a specific sequence of opening moves
-- increment_code (TEXT) what the time rules were when the game was played. Ex: 15+2
+Char | Piece
+--------------
+.       empty square
+/       end of board row
+
+P       white pawn
+R       white rook
+N       white knight
+B       white bishop
+K       white king
+Q       white queen
+
+p       black pawn
+r       black rook
+n       black knight
+b       black bishop
+k       black king
+q       black queen
 
 
 
+REQUEST: /gameslist[<search_criteria>]
+    Request a list of all games which match a certain search criteria. The search criteria is specified by GET parameters.
+
+GET Parameters:
+    user ----------- (optional, default:"") Only include games where this user played. The value is case-insensitive,
+                        and will also match any usernames which start with the given value.
+                        Ex: /gameslist?user=avocado
+    turns ---------- (optional, default: infinity, default comparitor: =) returns games played with a certain number of turns
+                    can be modified with + or - to obtain a list of games with turns above (+) or below (-) the specified number
+                    Ex: /gameslist?turns+15 *games with more than 15 turns*
+    rating_max ----- (optional, default: infinity) Only include games where both players are rated below this number
+                        Ex: /gameslist?rating_max=1600
+    rating_min ----- (optional, default: 0) Only include games where at least one player is rated above this number
+                        Ex /gameslist?rating_min=200
+    opening_moves -- (optional, default: "") Only include games which start with these moves.
+                        The moves are specified in SAN format (Standard Algebraic Notation) separated by dashes.
+                        Ex: /gameslist?opening_moves=d4-c6-kd7
+    page_size ------ (optional, default: "")
+    page_id -------- (optional, default: 1)
+
+
+
+RESPONSE: A JSON list of dictionaries, where each dictionary contains data about a particular game. This JSON
+    list will be sorted in descending order of player ranking. By the "player ranking" of a game, we mean the
+    rating of the higher-ranked player. The fields of each game dictionary are:
+
+    game_id --------- (TEXT) this id can be used to request the full game data (see /game/<game_id> endpoint)
+    white_username -- (TEXT)
+    white_rating ---- (INTEGER)
+    black_username -- (TEXT)
+    black_rating ---- (INTEGER)
+    turns ----------- (INTEGER) the number of moves in the game
+    victory_status -- (TEXT) such as draw, outoftime, mate
+    winner ---------- (TEXT) one of three values: "black", "white", or "draw"
+
+    Notice that these fields do include data about the content of the game. Use /game/<game_id> for full game data.
+
+
+EXAMPLE:
+    /gameslist?

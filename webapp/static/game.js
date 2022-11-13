@@ -82,7 +82,7 @@ function loadPage() {
 
 
 
-    console.log(capturedPieces);
+    // console.log(capturedPieces);
 
 
     drawBoard();
@@ -186,10 +186,9 @@ function drawBoard() {
 
 }
 
-//remember currentTurn is 1-indexed 
 
 function nextTurn() {
-    if(moveCount < boardPositions.length) {
+    if(moveCount + 1 < boardPositions.length) {
         moveCount += 1;
         document.getElementById("turn-counter").innerHTML = moveCount;
         drawBoard()

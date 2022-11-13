@@ -127,3 +127,7 @@ def get_game(game_id):
 
     return json.dumps(game_data)
 
+
+@api.route('/help/')
+def help():
+    return flask.send_file('./doc/api-design.txt')
