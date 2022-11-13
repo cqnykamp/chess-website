@@ -24,7 +24,7 @@ def get_connection():
                             password=config.password)
 
 
-@api.route('/gameslist', strict_slashes=False)
+@api.route('/games', strict_slashes=False)
 def get_games_list():
 
     args = flask.request.args
@@ -93,7 +93,7 @@ def get_games_list():
     if ('page_id' in args and args['page_id'].isdigit()) or ('page_size' in args and args['page_size'].isdigit()):
 
         # defaults
-        page_size = 10
+        page_size = 25
         page_id = 0
 
         try:
@@ -189,18 +189,29 @@ def get_game(game_id):
             board_positions.append(str(board).replace(" ", "").replace('\n', "/"))
             captured = []
 
+            print(moves)
+
             for move_string in moves.split(" "):
                 move = board.parse_san(move_string)
-                print(f"Move is ${move}")
+                # print(f"Move is {move}")
 
-                captured_piece = ""
+                captured_piece_type = ""
                 if board.is_capture(move):
-                    captured_piece = board.piece_at(move.to_square).symbol()
+                
+                    to_square = move.to_square
+
+                    if board.is_en_passant(move):
+                        # Ensure that to_square points to the position of the captured piece
+                        if to_square < 32:
+                            to_square += 8
+                        else:
+                            to_square -= 8
+
+                    captured_piece_type = board.piece_type_at(to_square)
 
                 board.push(move)
-                # board.push_san(move_string)
                 board_positions.append(str(board).replace(" ", "").replace('\n', "/"))
-                captured.append(captured_piece)
+                captured.append(captured_piece_type)
 
 
             game_data = {

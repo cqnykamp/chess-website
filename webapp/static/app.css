@@ -197,6 +197,33 @@ li img{
     margin-bottom: 10px;
 }
 
+#searchResults table, #searchResults th, #searchResults td {
+    border: 0.01px solid;
+    border-collapse: collapse;
+}
+
+#searchResults th, #searchResults td {
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+
+#searchResults th {
+    border-bottom: 3px solid;
+    background-color: #d0d0d0;
+}
+
+
+#searchResults tr:nth-child(even) {
+    background-color: white;
+}
+
+
+#searchResults tr:nth-child(odd) {
+    background-color: #ebebeb;
+}
 
 
 

@@ -42,13 +42,13 @@ function onSearch() {
         rating_max:  document.getElementById("above_rate_search").value,
         rating_min: document.getElementById("below_rate_search").value,
 
-        page_size: 10,
+        // page_size: 10,
         page_id: 0,
     };
 
     // console.log(parameters);
 
-    var url = getAPIBaseURL() + '/gameslist' + urlExtend(parameters);
+    var url = getAPIBaseURL() + '/games' + urlExtend(parameters);
 
     // console.log("url is");
     // console.log(url);
@@ -63,13 +63,32 @@ function onSearch() {
         for (let game of games) {
             var game_id = game.game_id
 
-            listBody += `<li><a href=` + getBaseURL() +'/game/'+game_id+ `>${ game['white_username'] } vs ${ game['black_username'] }</li>\n`;
+            listBody += `<tr>
+                <td><a href=` + getBaseURL() +'/game/'+game_id+ `>${ game['white_username'] }</a></td>
+                <td>${game['white_rating']}</td>
+                <td>${ game['black_username'] }</td>
+                <td>${game['black_rating']}</td>
+                <td>${game['turns']}</td>
+                <td>${game['victory_status']}</td>
+                <td>${game['winner']}</td>
+            </a></tr>\n`;
 
         }
 
         var searchResultsElement = document.getElementById('searchResults');
         if (searchResultsElement) {
-            searchResultsElement.innerHTML = listBody;
+            searchResultsElement.innerHTML = `<table>
+                <tr>
+                    <th>White username</th>
+                    <th>White rating</th>
+                    <th>Black username</th>
+                    <th>Black rating</th>
+                    <th>Turns</th>
+                    <th>Victory status</th>
+                    <th>Winner</th>
+                </tr>
+                ${listBody}
+            </table>`;
         }
     })
 

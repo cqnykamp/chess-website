@@ -53,7 +53,7 @@ q       black queen
 
 
 
-REQUEST: /gameslist[<search_criteria>]
+REQUEST: /games[<search_criteria>]
     Request a list of all games which match a certain search criteria. The search criteria is specified by GET parameters.
 
 GET Parameters:
@@ -70,10 +70,10 @@ GET Parameters:
     opening_moves -- (optional, default: "") Only include games which start with these moves.
                         The moves are specified in SAN format (Standard Algebraic Notation) separated by dashes.
                         Ex: /gameslist?opening_moves=d4-c6-kd7
-
-    page_id -------- (optional, default: 0) Limit the data returned to a certain number of entries. If this parameter is not
-                        specified, the API will return all the data.
-    page_size ------ (optional, default: 10) The number of entries per page. Only used when page_id is specified.
+    page_id -------- (optional, default: 0) Limit the data returned to a certain number of entries. 
+    page_size ------ (optional, default: 10) The number of entries per page.
+                        NOTE: If either page_id or page_size is specified as non-negative integers, the API will
+                        paginate the data. Otherwise, it will return all the data.
 
 
 RESPONSE: A JSON list of dictionaries, where each dictionary contains data about a particular game. This JSON
@@ -90,7 +90,3 @@ RESPONSE: A JSON list of dictionaries, where each dictionary contains data about
     winner ---------- (TEXT) one of three values: "black", "white", or "draw"
 
     Notice that these fields do include data about the content of the game. Use /game/<game_id> for full game data.
-
-
-EXAMPLE:
-    /gameslist?
