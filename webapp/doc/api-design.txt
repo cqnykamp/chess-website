@@ -2,6 +2,7 @@ api-design
 Charles Nykamp and Barry Nwike
 
 
+
 This API has two different endpoints:
 1. An endpoint which returns the game data of a particular game id
 2. An endpoint that returns game metadatas of all games which fit search criteria
