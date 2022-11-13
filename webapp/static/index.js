@@ -1,59 +1,69 @@
 
 
-function getAPIBaseURL() {
-    var baseURL = window.location.protocol
-                    + '//' + window.location.hostname
-                    + ':' + window.location.port
-                    + '/api';
-    return baseURL;
+function getBaseURL() {
+    return window.location.protocol
+        + '//' + window.location.hostname
+        + ':' + window.location.port;
+    
 }
+
+function getAPIBaseURL() {
+    return getBaseURL() + '/api';
+}
+
+
 function urlExtend(search_parameters){
-    var extension = "?";
-    if (search_parameters.user){
-        extension += "user="+search_parameters.user;
+    var extension = "";
+
+    for(let key in search_parameters) {
+        value = search_parameters[key];
+
+        if(value !== "") {
+            if(extension === "") {
+                extension += "?" + key + "=" + value;
+            } else {
+                extension += "&" + key + "=" + value;
+            }
+        }
     }
-    if(search_parameters.move){
-        extension+="startmove="+search_parameters.move
-    }
-    if(search_parameters.turns){
-        extension+="turn="+search_parameters.turns
-    }
-    if(search_parameters.rate_below){
-        extension+="rating_min="+search_parameters.rate_below
-    }
-    if(search_parameters.rate_above){
-        extension+="rating_max="+search_parameters.rate_above
-    }
-    if(extension !== "?"){
-        return extension;
-    }
-    return "";
+
+    return extension;
 }
 
 
 function onSearch() {
 
-    console.log('Search button clicked');
-    var parameters = {user:document.getElementById('user_search').value, 
-    move:document.getElementById("startmove_search").value, 
-    turns:document.getElementById("movenumb_search").value, 
-    rate_above: document.getElementById("above_rate_search").value,
-    rate_below:document.getElementById("below_rate_search").value};
+    // console.log('Search button clicked');
+    var parameters = {
+        // These keys should match the API parameter names
+        user: document.getElementById('user_search').value, 
+        opening_moves: document.getElementById("startmove_search").value, 
+        turns: document.getElementById("movenumb_search").value, 
+        rating_max:  document.getElementById("above_rate_search").value,
+        rating_min: document.getElementById("below_rate_search").value,
 
-    var url = getAPIBaseURL() + '/gameslist'+urlExtend(parameters);
+        page_size: 10,
+        page_id: 0,
+    };
 
+    // console.log(parameters);
+
+    var url = getAPIBaseURL() + '/gameslist' + urlExtend(parameters);
+
+    // console.log("url is");
+    // console.log(url);
 
     fetch(url, {method: 'get'})
 
     .then((response) => response.json())
 
     .then(function(games) {
-        console.log(games)
+        // console.log(games)
         var listBody = '';
         for (let game of games) {
             var game_id = game.game_id
 
-            listBody += `<li><a href=` + baseURL+'/game/'+game_id+ `>${ game['white_username'] } vs ${ game['black_username'] }</li>\n`;
+            listBody += `<li><a href=` + getBaseURL() +'/game/'+game_id+ `>${ game['white_username'] } vs ${ game['black_username'] }</li>\n`;
 
         }
 

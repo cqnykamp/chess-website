@@ -70,9 +70,10 @@ GET Parameters:
     opening_moves -- (optional, default: "") Only include games which start with these moves.
                         The moves are specified in SAN format (Standard Algebraic Notation) separated by dashes.
                         Ex: /gameslist?opening_moves=d4-c6-kd7
-    page_size ------ (optional, default: "")
-    page_id -------- (optional, default: 1)
 
+    page_id -------- (optional, default: 0) Limit the data returned to a certain number of entries. If this parameter is not
+                        specified, the API will return all the data.
+    page_size ------ (optional, default: 10) The number of entries per page. Only used when page_id is specified.
 
 
 RESPONSE: A JSON list of dictionaries, where each dictionary contains data about a particular game. This JSON

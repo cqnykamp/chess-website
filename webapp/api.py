@@ -27,25 +27,127 @@ def get_connection():
 @api.route('/gameslist', strict_slashes=False)
 def get_games_list():
 
+    args = flask.request.args
+    # print(args)
+
     query = '''
-        SELECT users_white.username, users_black.username
+        SELECT games.id, users_white.username, games.white_player_rating, users_black.username, games.black_player_rating,
+        games.turns, games.victory_status, games.winner, games.rated_status, openings.opening_name, games.increment_code
         FROM games
         LEFT OUTER JOIN users AS users_white
         ON users_white.id = games.white_player_id
         LEFT OUTER JOIN users AS users_black
         ON users_black.id = games.black_player_id
-        LIMIT 10;
+        LEFT OUTER JOIN openings
+        ON openings.id = games.opening_id
+        WHERE 1 = 1
     '''
+
+    db_args = []
+
+    if 'user' in args:
+        query += '''
+            AND (users_white.username ILIKE CONCAT(%s, '%%') OR users_black.username ILIKE CONCAT(%s, '%%'))
+        '''
+        db_args.append(args['user'])
+        db_args.append(args['user'])
+
+
+    if 'turns' in args:
+        query += '''
+            AND games.turns = %s
+        '''
+        db_args.append(args['turns'])
+
+
+    if 'rating_max' in args:
+        query += '''
+            AND games.white_player_rating <= %s AND games.black_player_rating <= %s
+        '''
+        db_args.append(args['rating_max'])
+        db_args.append(args['rating_max'])
+
+
+    if 'rating_min' in args:
+        query += '''
+            AND (games.white_player_rating >= %s OR games.black_player_rating >= %s)
+        '''
+        db_args.append(args['rating_min'])
+        db_args.append(args['rating_min'])
+
+    if 'opening_moves' in args:
+        query += '''
+            AND REPLACE(games.moves, ' ', '-') ILIKE CONCAT(%s, '%%')
+        '''
+        db_args.append(args['opening_moves'])
+    
+
+    query += '''
+        ORDER BY CASE WHEN games.white_player_rating > games.black_player_rating
+            THEN games.white_player_rating
+            ELSE games.black_player_rating
+        END DESC
+    '''
+
+
+    if ('page_id' in args and args['page_id'].isdigit()) or ('page_size' in args and args['page_size'].isdigit()):
+
+        # defaults
+        page_size = 10
+        page_id = 0
+
+        try:
+            page_size = int(args['page_size'])
+        except:
+            pass
+
+        try:
+            page_id = int(args['page_id'])
+        except:
+            pass
+
+        # print('page size is ', page_size)
+        # print(type(page_size))
+        # print('page id is', page_id)
+        # print(type(page_id))
+
+        query += '''
+            LIMIT %s OFFSET %s
+        '''
+        db_args.append(page_size)
+        db_args.append(page_id * page_size)
+
+
+    query += ";"
+
+
+    print(query)
+
 
     games_list = []
     try:
         connection = get_connection()
         cursor = connection.cursor()
-        cursor.execute(query)
+        cursor.execute(query, tuple(db_args))
         for row in cursor:
-            game = {'white_username': row[0],
-                      'black_username': row[1]}
-            games_list.append(game)
+
+            [game_id, white_username, white_rating, black_username, black_rating, turns, victory_status, winner, rated_status, opening_name, increment_code] = row
+
+            game_metadata = {
+                'game_id': game_id,
+                'white_username': white_username,
+                'white_rating': white_rating,
+                'black_username': black_username,
+                'black_rating': black_rating,
+                'turns': turns,
+                'victory_status': victory_status,
+                'winner': winner,
+                'rated_status': rated_status,
+                'opening_name': opening_name,
+                'increment_code': increment_code,
+            }
+
+            games_list.append(game_metadata)
         cursor.close()
         connection.close()
     except Exception as e:
