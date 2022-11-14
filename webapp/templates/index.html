@@ -8,38 +8,100 @@
 
 {% block content %}
 
-<div class = "pageelements">
+
+
+<div class="searchfunction centered info-table">
+
+    <h1 class="panel without-space-below">Find games where...</h1> 
+    <table>
+        <tr>
+            <td class="panel without-space-below">
+                <h3>Players</h3>
+                <ul>
+                    <li><em>Username </em><input id = "user_search" placeholder="ex: avocado" size="15"></li>
+                    <li><em>Rating min </em> <input id="below_rate_search" type="number"></li>
+                    <li><em>Rating max </em><input id="above_rate_search" type="number"></li>
+                </ul>
+            </td>
+        
+            <td class="panel without-space-below">
+                <h3>Outcome</h3>
+                <ul>
+                    <li><em>Winner</em><select id="winner_search">
+                        <option selected>Any</option>
+                        <option>Black</option>
+                        <!-- <option>Black by checkmate</option>
+                        <option>Black by resign</option>
+                        <option>Black by clock</option> -->
+
+                        <option>White</option>
+                        <!-- <option>White by checkmate</option>
+                        <option>White by resign</option>
+                        <option>White by clock</option> -->
+
+                        <option>Draw</option>
+
+                    </select></li>
+                </ul>        
+        
+            </td>
+        
+        
+            <td class="panel without-space-below">
+                <h3>Opening</h3>
+                <ul>
+                    <li><em>Opening name</em><input id = "opening_name_search" placeholder="ex: scandinavian"></li>
+                    <li><em>Opening moves</em> <input id = "opening_moves_search" placeholder="ex: e4 e5"></li>
+                </ul>        
+            </td>
+        
+            <td class="panel without-space-below">
+                <h3>Gameplay</h3>
+                <ul>
+                    <li><em>Moves </em><input id = "moves_search" placeholder="ex: Qxf4"></li>
+                    <li><em>Move count</em> <input id = "movenumb_search" type="number"></li>    
+                </ul>        
+            </td>
+        
+            <td class="panel without-space-below">
+                <h3>Stats</h3>
+                <ul>
+                    <li><em>Checks</em> <input id = "checks_search" type="number" size="5"></li>    
+                    <li><em>Captures </em><input id = "captures_search" type="number" size="5"></li>
+                    <li><em>Castles </em><input id = "castles_search" type="number" size="5"></li>
+                    <li><em>En passants </em><input id = "en_passants_search" type="number" size="5"></li>
+                </ul>        
+            </td>
+        
+        </tr>
+    </table>
+
+
+
+<!-- 
+    <ul id = "filterList" style ="list-style: none;">
+        <li>Moves:
+        </li>
+        <li> Opening moves: 
+            <input id = "opening_moves_search" placeholder="ex: e4 e5">
+        </li>
+    </ul>     -->
+
+</div>
+
+<div class="centered search">
+    <button id ="searchbutton" style="text-shadow: 100px;">Search</button>
+</div>
+
+
+
+<!-- <div class = "pageelements">
     <div class = introduction>
         <ul style ="list-style: none;">
             <h2>Welcome to Analychess!</h2>
             <p><img id = "homeicon" src ="{{ url_for('static', filename='images/knight-white.png') }}"></p>
         </ul>
     </div>
-
-    <div class="searchfunction">
-        <h1>Find Games where: </h1>
-        
-        <ul id = "filterList" style ="list-style: none;">
-            <li> Username: 
-                <input id = "user_search" placeholder="ex: avocado">
-            </li>
-            <li> Opening moves: 
-                <input id = "startmove_search" placeholder="ex: e4 e5">
-            </li>
-            <li> # of Moves in Game: 
-                <input id = "movenumb_search">
-            </li>
-            <li> Rating between: 
-                <input id = "below_rate_search"> ~
-                <input id = "above_rate_search">
-            </li>  
-            <div class="search">
-                <button id ="searchbutton" style="text-shadow: 100px;">Search</button>
-            </div>          
-    
-        </ul>    
-    </div>
-
 
 </div>  
 
@@ -55,11 +117,13 @@
         </li>
     
     </ul>            
+</div> -->
+
+
+
+<div id="content-right">
+    <div id="searchResults" class="info-table centered"></div>
 </div>
-
-
-
-<div id="searchResults" class="centered"></div>
 
 
 

@@ -158,7 +158,7 @@ def get_games_list():
     if 'user' in args:
         # Filter by username or partial username of either player
         query += '''
-            AND (users_white.username ILIKE CONCAT('%%', %s, '%%') OR users_black.username ILIKE CONCAT(%s, '%%'))
+            AND (users_white.username ILIKE CONCAT('%%', %s, '%%') OR users_black.username ILIKE CONCAT('%%', %s, '%%'))
         '''
         db_args.append(args['user'])
         db_args.append(args['user'])
@@ -190,13 +190,33 @@ def get_games_list():
         db_args.append(args['rating_min'])
 
 
+    if 'moves' in args:
+        # Filter by moves
+        query += '''
+            AND games.moves ILIKE CONCAT('%%', %s, '%%')
+        '''
+        db_args.append(args['moves'])
+
+
+
     if 'opening_moves' in args:
         # Filter by opening moves
-        # NOte that the API uses dashes between moves, while the database uses spaces
         query += '''
-            AND REPLACE(games.moves, ' ', '-') ILIKE CONCAT(%s, '%%')
+            AND games.moves ILIKE CONCAT(%s, '%%')
         '''
         db_args.append(args['opening_moves'])
+
+
+    if 'opening_name' in args:
+        # Filter by name of opening moves
+        query += '''
+            AND ( openings1.opening_name ILIKE CONCAT('%%', %s, '%%') OR openings2.opening_name ILIKE CONCAT('%%', %s, '%%')
+                OR openings3.opening_name ILIKE CONCAT('%%', %s, '%%') OR openings4.opening_name ILIKE CONCAT('%%', %s, '%%') )
+        '''
+        db_args.append(args['opening_name'])
+        db_args.append(args['opening_name'])
+        db_args.append(args['opening_name'])
+        db_args.append(args['opening_name'])
     
 
     # Sort the results by player rating descending

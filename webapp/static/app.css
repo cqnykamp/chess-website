@@ -62,6 +62,8 @@ nav {
 
     color: white;
     font-size: xx-large;
+
+    position: sticky;
 }
 
 nav a {
@@ -123,6 +125,10 @@ footer{
     margin-top: 0vw;
 }
 
+.without-space-below {
+    margin-bottom: 0vh;
+}
+
 
 .extra-padding {
     padding: 2vw;
@@ -147,9 +153,17 @@ input{
 input:focus {
     width: 40%;
 }
-.search{
+
+.search button{
+    padding-left: 3em;
+    padding-right: 3em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+
+    font-size:  larger;
+
     text-align: center;
-    margin-right: 78%;
+    /* margin-right: 78%; */
 }
 
 .pageelements{
@@ -167,15 +181,32 @@ input:focus {
     margin-top: 10px;
     
 }
+
+
 .searchfunction{
-    padding-left: 20px;
+    /* display: float; */
+    /* float: left; */
+    /* position: sticky; */
+    /* width: 25vw; */
+    /* position: fixed; */
+
+    /* height: 80vh; */
+    /* margin: 2vw; */
+
+    /* padding-left: 20px;
     display:inline-flex;
     margin-left: 30px;
     border: 1px solid black;
     text-align: left;
-    vertical-align: center;
+    vertical-align: center; */
     
 }
+
+.searchfunction ul {
+    list-style-type: none;
+    padding-inline-start: 0px;
+}
+
 #homeicon{
     float: left;
     height: 30%;
@@ -197,43 +228,59 @@ li img{
     margin-bottom: 10px;
 }
 
-#searchResults table, #searchResults th, #searchResults td {
+
+#content-right {
+    /* margin-left: 25vw; */
+    
+}
+
+
+.info-table {
+    margin-top: 5vh;
+}
+
+
+.info-table table,
+.info-table th, 
+.info-table td {
     border: 0.01px solid;
     border-collapse: collapse;
 }
 
-#searchResults th, #searchResults td {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
+.info-table th, .info-table td {
+    padding-left: 1em;
+    padding-right: 1em;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
 }
 
 
-#searchResults th {
+.info-table th {
     border-bottom: 3px solid;
     background-color: #d0d0d0;
 }
 
 
 /* Alternate colors for search result rows */
-#searchResults tr:nth-child(even) {
+.info-table tr:nth-child(even) {
     background-color: white;
 }
-#searchResults tr:nth-child(odd) {
+.info-table tr:nth-child(odd) {
     background-color: #ebebeb;
 }
 
 
-/* #searchResults table {
-    position: relative;
-} */
-
-#searchResults .details {
-    /* border-left: 1px dotted; */
+/* #searchResults .details {
     font-size: smaller;
     padding-left: 0.5em;
     padding-right: 0.5em;
+} */
+
+
+.stats-table, .stats-table td, .stats-table tr {
+    /* border-style: none; */
+    /* font-size: large; */
+    background-color: inherit;
 }
   
 /* 

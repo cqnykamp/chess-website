@@ -35,14 +35,19 @@ function urlExtend(search_parameters){
 
 function onSearchButtonClicked() {
 
-    let opening_moves_unparsed = document.getElementById("startmove_search").value;
-    let opening_moves = opening_moves_unparsed.split(" ").join("-");
+    let opening_moves_unparsed = document.getElementById("opening_moves_search").value;
+    let opening_moves = opening_moves_unparsed.replace("+", "%2B").replace(" ", "+");
+
+    let moves_unparsed = document.getElementById("moves_search").value;
+    let moves = moves_unparsed.replace("+", "%2B").replace(" ", "+");
 
     // console.log('Search button clicked');
     var parameters = {
         // These keys should match the API parameter names
         user: document.getElementById('user_search').value, 
         opening_moves: opening_moves,
+        moves: moves,
+        opening_name:  document.getElementById("opening_name_search").value, 
         turns: document.getElementById("movenumb_search").value, 
         rating_max:  document.getElementById("above_rate_search").value,
         rating_min: document.getElementById("below_rate_search").value,
@@ -84,6 +89,7 @@ function search(parameters) {
             }
 
             listBody += `<tr>
+                <td><a href='${ getBaseURL() }/game/${ game_id }'>View</td>
                 <td>
                 <h3>${game.white_username} (${game.white_rating}) vs ${game.black_username} (${game.black_rating})</h3>
                     ${game.turns} ${game.turns == 1? 'turn' : 'turns' },
@@ -95,13 +101,15 @@ function search(parameters) {
                     ${game.opening_names.join("<br>")}
                 </td>
                 <td>
-                    Checks: ${game.checks}<br/>
-                    Captures: ${game.captures}<br/>
-                    Promotions: ${game.promotions}<br/>
-                    En passants: ${game.en_passants}
-                </td>
+                    
+                    <div>
+                        <div>Checks: ${game.checks}</div>
+                        <div>Captures: ${game.captures}</div>
+                        <div>Promotions: ${game.promotions}</div>
+                        <div>En passants: ${game.en_passants}</div>
+                    </div>
 
-                <td class='details'><a href='${ getBaseURL() }/game/${ game_id }'>View</td>
+                </td>
 
             </a></tr>\n`;            
 
@@ -110,13 +118,14 @@ function search(parameters) {
         var searchResultsElement = document.getElementById('searchResults');
         if (searchResultsElement) {
 
-            searchResultsElement.innerHTML = `<table>
+            searchResultsElement.innerHTML = `
+            <h1 class='panel without-space-below'>Results</h1>
+            <table>
                 <tr>
+                    <th></th>
                     <th>Game</th>
-                    <th>Opening</th>
+                    <th>Openings</th>
                     <th>Stats</th>
-
-                    <th class='details'>Details</th>
                 </tr>
                 ${listBody}
             </table>`;

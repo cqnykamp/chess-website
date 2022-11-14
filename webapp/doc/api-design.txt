@@ -40,13 +40,15 @@ GET Parameters:
                         Ex: /gameslist?rating_max=1600
     rating_min ----- (optional, default: 0) Only include games where at least one player is rated above this number
                         Ex /gameslist?rating_min=200
+    moves ---------- (optional, default: "") Only include games which contain this move sequence
     opening_moves -- (optional, default: "") Only include games which start with these moves.
-                        The moves are specified in SAN format (Standard Algebraic Notation) separated by dashes.
-                        Ex: /gameslist?opening_moves=d4-c6-kd7
+                            NOTE: The moves are specified in SAN format (Standard Algebraic Notation) separated by pluses.
+                            For moves which contain plus signs such as Qf2+, escape them like Qf2%2B
+    opening_name --- (optional, default: "") Only include games with this opening name or whose opening includes this opening name
     page_id -------- (optional, default: 0) Limit the data returned to a certain number of entries. 
     page_size ------ (optional, default: 10) The number of entries per page.
-                        NOTE: If either page_id or page_size is specified as non-negative integers, the API will
-                        paginate the data. Otherwise, it will return all the data.
+                            NOTE: If either page_id or page_size is specified as non-negative integers, the API will
+                            paginate the data. Otherwise, it will return all the data.
 
 
 RESPONSE: A JSON list of dictionaries, where each dictionary contains data about a particular game. This JSON
