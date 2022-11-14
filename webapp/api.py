@@ -31,7 +31,11 @@ GAME_METADATA_FIELDS = '''
     users_white.username, games.white_player_rating, users_black.username, games.black_player_rating,
     games.turns, games.victory_status, games.winner, games.rated_status, games.increment_code,
     openings1.opening_name, openings2.opening_name, openings3.opening_name, openings4.opening_name,
-    games.checks, games.captures, games.en_passants, games.castles, games.promotions
+    games.checks, games.captures, games.en_passants, games.castles, games.promotions,
+
+    games.capturing_queens, games.capturing_rooks, games.capturing_bishops, games.capturing_knights, games.capturing_pawns, games.capturing_kings,
+    games.captured_queens, games.captured_rooks, games.captured_bishops, games.captured_knights, games.captured_pawns
+
 '''
 
 GAME_METADATA_TABLE_JOINS = '''
@@ -55,7 +59,11 @@ def package_metadata_row(metadata_row):
     [white_username, white_rating, black_username, black_rating, \
         turns, victory_status, winner, rated_status, increment_code, \
         opening1, opening2, opening3, opening4, \
-        checks, captures, en_passants, castles, promotions \
+        checks, captures, en_passants, castles, promotions, \
+
+        capturing_queens, capturing_rooks, capturing_bishops, capturing_knights, capturing_pawns, capturing_kings, \
+        captured_queens, captured_rooks, captured_bishops, captured_knights, captured_pawns, \
+
     ] = metadata_row
 
     openings = []
@@ -68,6 +76,23 @@ def package_metadata_row(metadata_row):
     if opening4:
         openings.append(opening4)
 
+    captured_pieces = {
+        'queen': captured_queens,
+        'rook': captured_rooks,
+        'knight': captured_knights,
+        'bishop': captured_bishops,
+        'pawn': captured_pawns,
+    }
+
+    captures_by_piece = {
+        'king': capturing_kings,
+        'queen': capturing_queens,
+        'rook': capturing_rooks,
+        'knight': capturing_knights,
+        'bishop': capturing_bishops,
+        'pawn': capturing_pawns,
+    }
+
     return {
         'white_username': white_username,
         'white_rating': white_rating,
@@ -79,6 +104,13 @@ def package_metadata_row(metadata_row):
         'rated_status': rated_status,
         'opening_names': openings,
         'increment_code': increment_code,
+
+        'checks': checks,
+        'captures': captures,
+        'en_passants': en_passants,
+        'promotions': promotions,
+        'captured_pieces': captured_pieces,
+        'captures_by_piece': captures_by_piece,
     }
 
 

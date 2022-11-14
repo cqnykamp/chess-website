@@ -4,6 +4,9 @@
 <script>
     var boardPositions = JSON.parse('{{ game_data.board_positions|tojson }}');
     var capturedPieces = JSON.parse('{{ game_data.captured_pieces|tojson }}');
+
+    var intervalForward;
+    var intervalBack;
 </script>
 
 <script type='text/javascript' src="{{ url_for('static', filename='game.js') }}"></script>
@@ -40,13 +43,28 @@
                 <b>Victory status:</b> {{ game_data.victory_status }}<br/>
                 <b>Openings:</b> {{ game_data.opening_names }}<br/>
             </div>
+
+            <div class="panel">
+                <h3>Stats</h3>
+                <b>Checks:</b> {{ game_data.checks }}<br/>
+                <b>Captures:</b> {{ game_data.captures }}<br/>
+                <b>Promotions:</b> {{ game_data.promotions }}<br/>
+                <b>En passants:</b> {{ game_data.en_passants }}<br/>
+
+            </div>
             
             <div id="moves-panel" class="panel">
 
                 <div class="inline">
                     <h3>Moves: <span id="turn-counter">0</span>/{{ game_data.turns }}</h3>
-                    <button onclick="previousTurn()">&#9668; Back</button>
-                    <button onclick="nextTurn()">Forward &#9658;</button>
+                    <button
+                        onmousedown="clearInterval(intervalBack); previousTurn(); intervalForward=setInterval(previousTurn, 200)"
+                        onmouseup="clearInterval(intervalForward)"
+                    >&#9668; Back</button>
+                    <button
+                        onmousedown="clearInterval(intervalForward); nextTurn(); intervalBack=setInterval(nextTurn, 200)"
+                        onmouseup="clearInterval(intervalBack)"
+                    >Forward &#9658;</button>
                 </div>
 
                 <div id="moves-list">{{ game_data.moves }}</div>
@@ -55,23 +73,8 @@
 
             
             <div class="panel">
-                
                 <h3>Captured</h3>
-
-                <div id='captured'>
-                    <!-- <img src="{{ url_for('static', filename='images/pawn-white.png') }}" />
-                    <img src="{{ url_for('static', filename='images/knight-white.png') }}" />
-                    <img src="{{ url_for('static', filename='images/pawn-white.png') }}" />
-                    <img src="{{ url_for('static', filename='images/pawn-white.png') }}" />
-                    <img src="{{ url_for('static', filename='images/queen-white.png') }}" /> -->
-                    
-                </div>
-
-
-                <!-- <div class='captured'>
-                    <img src="{{ url_for('static', filename='images/bishop-black.png') }}" />
-                </div> -->
-
+                <div id='captured'></div>
             </div>
 
         
@@ -79,9 +82,7 @@
         </div>
 
 
-        <!-- <div class="split right panel" > -->
-            <table id="gameboard"></table>
-        <!-- </div> -->
+        <table id="gameboard" class="split"></table>
 
     </div>
 
