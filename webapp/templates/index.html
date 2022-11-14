@@ -15,8 +15,9 @@
             <p><img id = "homeicon" src ="{{ url_for('static', filename='images/knight-white.png') }}"></p>
         </ul>
     </div>
+
     <div class="searchfunction">
-        <h3>Find Games where: </h3>
+        <h1>Find Games where: </h1>
         
         <ul id = "filterList" style ="list-style: none;">
             <li> Username: 
@@ -38,25 +39,28 @@
     
         </ul>    
     </div>
-</div>
-    
-    
-<div class = "games">
 
-    <!-- <hr />
+
+</div>  
+
+<hr />
+
+
+<div class = "games">
     <h2>Top Games of the Day:</h2>
     <ul style ="list-style: none;">
         <li> 
             <img src = "{{ url_for('static', filename='images/queen-white.png') }}"/> 
             <h3><a href="mockup2.html"><em>avocado</em> (1458) vs <em>Terry</em> (1522)</a></h3> 
         </li>
-
-    </ul> -->
-
-
-    <div id="searchResults" class="centered"></div>
-
+    
+    </ul>            
 </div>
+
+
+
+<div id="searchResults" class="centered"></div>
+
 
 
 {% endblock %}

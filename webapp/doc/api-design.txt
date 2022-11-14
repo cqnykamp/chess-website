@@ -21,9 +21,10 @@ RESPONSE: A JSON dictionary of the game data. The dictionary fields are:
     victory_status -- (TEXT) such as draw, outoftime, mate
     winner ---------- (TEXT) one of three values: "black", "white", or "draw"
     rated_status ---- (BOOLEAN) either the game is a rated match or not 
-    moves ----------- (TEXT) a string sequence of every move made in the game
     opening_name ---- (TEXT) A string that gives the exact chess name of a specific sequence of opening moves
     increment_code -- (TEXT) what the time rules were when the game was played. Ex: 15+2
+
+    moves ----------- (TEXT) a string sequence of every move made in the game
     board_positions - (LIST OF TEXT) the state of the board at every turn. Each element in the list is
                         a 71-character-long string, where each character represents one square, except for
                         slashes which indicate the end of the row. See below for a table of which
@@ -58,7 +59,7 @@ REQUEST: /games[<search_criteria>]
 
 GET Parameters:
     user ----------- (optional, default:"") Only include games where this user played. The value is case-insensitive,
-                        and will also match any usernames which start with the given value.
+                        and will also match any usernames which contain the given value.
                         Ex: /gameslist?user=avocado
     turns ---------- (optional, default: infinity, default comparitor: =) returns games played with a certain number of turns
                     can be modified with + or - to obtain a list of games with turns above (+) or below (-) the specified number
@@ -88,5 +89,9 @@ RESPONSE: A JSON list of dictionaries, where each dictionary contains data about
     turns ----------- (INTEGER) the number of moves in the game
     victory_status -- (TEXT) such as draw, outoftime, mate
     winner ---------- (TEXT) one of three values: "black", "white", or "draw"
+    rated_status ---- (BOOLEAN) either the game is a rated match or not 
+    opening_name ---- (TEXT) A string that gives the exact chess name of a specific sequence of opening moves
+    increment_code -- (TEXT) what the time rules were when the game was played. Ex: 15+2
+
 
     Notice that these fields do include data about the content of the game. Use /game/<game_id> for full game data.

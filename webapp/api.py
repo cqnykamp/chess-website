@@ -47,7 +47,7 @@ def get_games_list():
 
     if 'user' in args:
         query += '''
-            AND (users_white.username ILIKE CONCAT(%s, '%%') OR users_black.username ILIKE CONCAT(%s, '%%'))
+            AND (users_white.username ILIKE CONCAT('%%', %s, '%%') OR users_black.username ILIKE CONCAT(%s, '%%'))
         '''
         db_args.append(args['user'])
         db_args.append(args['user'])

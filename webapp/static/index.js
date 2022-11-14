@@ -31,7 +31,7 @@ function urlExtend(search_parameters){
 }
 
 
-function onSearch() {
+function onSearchButtonClicked() {
 
     // console.log('Search button clicked');
     var parameters = {
@@ -46,6 +46,12 @@ function onSearch() {
         page_id: 0,
     };
 
+    search(parameters);
+}
+
+
+function search(parameters) {
+
     // console.log(parameters);
 
     var url = getAPIBaseURL() + '/games' + urlExtend(parameters);
@@ -58,40 +64,87 @@ function onSearch() {
     .then((response) => response.json())
 
     .then(function(games) {
+
+        console.log("Response received");
         // console.log(games)
         var listBody = '';
         for (let game of games) {
             var game_id = game.game_id
 
+            // listBody += `<tr>
+            //     <td>${game['white_username'] }</td>
+            //     <td>${game['white_rating']}</td>
+            //     <td>${game['black_username'] }</td>
+            //     <td>${game['black_rating']}</td>
+            //     <td>${game['turns']}</td>
+            //     <td>${game['victory_status']}</td>
+            //     <td>${game['winner']}</td>
+            //     <td>${game['rated_status']}</td>
+            //     <td>${game['opening_name']}</td>
+            //     <td>${game['increment_code']}</td>
+
+            //     <td class='details'><a href='${ getBaseURL() }/game/${ game_id }'>View</td>
+
+            // </a></tr>\n`;
+
+            let outcome = 'draw'
+            if(game.winner != 'draw') {
+                outcome = game.winner + " won by " + game.victory_status;
+            }
+
             listBody += `<tr>
-                <td>${game['white_username'] }</a></td>
-                <td>${game['white_rating']}</td>
-                <td>${game['black_username'] }</td>
-                <td>${game['black_rating']}</td>
-                <td>${game['turns']}</td>
-                <td>${game['victory_status']}</td>
-                <td>${game['winner']}</td>
+                <td>
+                <h3>${game.white_username} (${game.white_rating}) vs ${game.black_username} (${game.black_rating})</h3>
+                    ${game.turns} ${game.turns == 1? 'turn' : 'turns' },
+                    ${outcome},
+                    ${game.rated_status == 'true' ? 'rated' : 'not rated'},
+                    ${game.increment_code}
+                </td>
+                <td>
+                    ${game.opening_name}
+                </td>
+
                 <td class='details'><a href='${ getBaseURL() }/game/${ game_id }'>View</td>
 
-            </a></tr>\n`;
+            </a></tr>\n`;            
 
         }
 
         var searchResultsElement = document.getElementById('searchResults');
         if (searchResultsElement) {
+
             searchResultsElement.innerHTML = `<table>
                 <tr>
-                    <th>White username</th>
-                    <th>White rating</th>
-                    <th>Black username</th>
-                    <th>Black rating</th>
-                    <th>Turns</th>
-                    <th>Victory status</th>
-                    <th>Winner</th>
+                    <th>Game</th>
+                    <th>Opening</th>
+
                     <th class='details'>Details</th>
                 </tr>
                 ${listBody}
             </table>`;
+
+
+
+
+            // searchResultsElement.innerHTML = `<table>
+            //     <tr>
+            //         <th>White username</th>
+            //         <th>White rating</th>
+            //         <th>Black username</th>
+            //         <th>Black rating</th>
+            //         <th>Turns</th>
+            //         <th>Victory status</th>
+            //         <th>Winner</th>
+            //         <th>Rated</th>
+            //         <th>Opening</th>
+            //         <th>Increment</th>
+
+            //         <th class='details'>Details</th>
+            //     </tr>
+            //     ${listBody}
+            // </table>`;
+
+
         }
     })
 
@@ -102,7 +155,7 @@ function onSearch() {
 
 function initialize() {
     var button = document.getElementById('searchbutton');
-    button.onclick = onSearch;
+    button.onclick = onSearchButtonClicked;
 }
 
 // This causes initialization to wait until after the HTML page and its
@@ -112,4 +165,7 @@ function initialize() {
 // brief discussion of problems with this old-fashioned approach that
 // can become relevant with more complex web pages than the ones
 // we are writing.
-window.onload = initialize;
+window.onload = () => {
+    initialize();
+    search({page_id: 0});
+};
