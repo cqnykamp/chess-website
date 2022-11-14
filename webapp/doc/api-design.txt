@@ -21,7 +21,7 @@ RESPONSE: A JSON dictionary of the game data. The dictionary fields are:
     victory_status -- (TEXT) such as draw, outoftime, mate
     winner ---------- (TEXT) one of three values: "black", "white", or "draw"
     rated_status ---- (BOOLEAN) either the game is a rated match or not 
-    opening_name ---- (TEXT) A string that gives the exact chess name of a specific sequence of opening moves
+    opening_names ---- (LIST OF TEXT) A list where each string gives a chess opening of this game
     increment_code -- (TEXT) what the time rules were when the game was played. Ex: 15+2
 
     moves ----------- (TEXT) a string sequence of every move made in the game
@@ -90,7 +90,7 @@ RESPONSE: A JSON list of dictionaries, where each dictionary contains data about
     victory_status -- (TEXT) such as draw, outoftime, mate
     winner ---------- (TEXT) one of three values: "black", "white", or "draw"
     rated_status ---- (BOOLEAN) either the game is a rated match or not 
-    opening_name ---- (TEXT) A string that gives the exact chess name of a specific sequence of opening moves
+    opening_names ---- (LIST OF TEXT) A list where each string gives a chess opening of the game
     increment_code -- (TEXT) what the time rules were when the game was played. Ex: 15+2
 
 

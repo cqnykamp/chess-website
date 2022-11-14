@@ -1,5 +1,7 @@
 
 
+var gamesData = []
+
 function getBaseURL() {
     return window.location.protocol
         + '//' + window.location.hostname
@@ -66,6 +68,8 @@ function search(parameters) {
     .then(function(games) {
 
         console.log("Response received");
+        gamesData = games;
+
         // console.log(games)
         var listBody = '';
         for (let game of games) {
@@ -101,7 +105,7 @@ function search(parameters) {
                     ${game.increment_code}
                 </td>
                 <td>
-                    ${game.opening_name}
+                    ${game.opening_names.join("<br>")}
                 </td>
 
                 <td class='details'><a href='${ getBaseURL() }/game/${ game_id }'>View</td>

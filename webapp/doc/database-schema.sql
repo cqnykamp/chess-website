@@ -22,6 +22,30 @@ CREATE TABLE games (
     victory_status text,
     winner text,
     rated_status boolean,
-    opening_id integer,
-    increment_code text
+    increment_code text,
+    opening_ply integer,
+
+    opening1 int,
+    opening2 int,
+    opening3 int,
+    opening4 int,
+
+    checks smallint,
+    captures smallint,
+    en_passants smallint,
+    castles smallint,
+    promotions smallint,
+
+    capturing_kings smallint,
+    capturing_queens smallint,
+    capturing_rooks smallint,
+    capturing_knights smallint,
+    capturing_bishops smallint,
+    capturing_pawns smallint,
+
+    captured_queens smallint,
+    captured_rooks smallint,
+    captured_knights smallint,
+    captured_bishops smallint,
+    captured_pawns smallint
 );
