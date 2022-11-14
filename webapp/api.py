@@ -1,7 +1,9 @@
-'''
+"""
 Charles Nykamp and Barry Nwike
 Carleton College Software Design Class, Fall 2022
-'''
+
+The API for querying the database about chess games
+"""
 
 
 import sys
@@ -17,33 +19,35 @@ api = flask.Blueprint('api', __name__)
 
 
 
-def get_connection():
-    ''' Returns a connection to the database described in the
-        config module. May raise an exception as described in the
-        documentation for psycopg2.connect. '''
-    return psycopg2.connect(database=config.database,
-                            user=config.user,
-                            password=config.password)
-
-
-
+# Common database fields shared across multiple endpoint queries
 GAME_METADATA_FIELDS = '''
+    /* Players */
     users_white.username, games.white_player_rating, users_black.username, games.black_player_rating,
+
+    /* Outcome */
     games.turns, games.victory_status, games.winner, games.rated_status, games.increment_code,
+
+    /* Openings */
     openings1.opening_name, openings2.opening_name, openings3.opening_name, openings4.opening_name,
+
+    /* Stats */
     games.checks, games.captures, games.en_passants, games.castles, games.promotions,
 
+    /* Piece type specifics on captures */
     games.capturing_queens, games.capturing_rooks, games.capturing_bishops, games.capturing_knights, games.capturing_pawns, games.capturing_kings,
     games.captured_queens, games.captured_rooks, games.captured_bishops, games.captured_knights, games.captured_pawns
 
 '''
 
+# Common table joins shared across multiple endpoint queries
 GAME_METADATA_TABLE_JOINS = '''
+    /* Join white and black players as separate tables */
     LEFT OUTER JOIN users AS users_white
     ON users_white.id = games.white_player_id
     LEFT OUTER JOIN users AS users_black
     ON users_black.id = games.black_player_id
 
+    /* Join all four possible opening names as separate tables */
     LEFT OUTER JOIN openings AS openings1
     ON openings1.id = games.opening1
     LEFT OUTER JOIN openings AS openings2
@@ -56,16 +60,26 @@ GAME_METADATA_TABLE_JOINS = '''
 
 
 def package_metadata_row(metadata_row):
-    [white_username, white_rating, black_username, black_rating, \
-        turns, victory_status, winner, rated_status, increment_code, \
-        opening1, opening2, opening3, opening4, \
-        checks, captures, en_passants, castles, promotions, \
+    """Given one row of results from the `GAME_METADATA_FIELDS`, package the fields
+        nicely into a JSON object, with some minor formatting """
 
+    # Unpack the GAME_METADATA_FIELDS values
+    [ \
+        # Players
+        white_username, white_rating, black_username, black_rating, \
+        # Outcome
+        turns, victory_status, winner, rated_status, increment_code, \
+        # Openings
+        opening1, opening2, opening3, opening4, \
+        # Stats
+        checks, captures, en_passants, castles, promotions, \
+        # Piece type specifics on captures
         capturing_queens, capturing_rooks, capturing_bishops, capturing_knights, capturing_pawns, capturing_kings, \
         captured_queens, captured_rooks, captured_bishops, captured_knights, captured_pawns, \
 
     ] = metadata_row
 
+    # List of non-null openings for this row
     openings = []
     if opening1:
         openings.append(opening1)
@@ -76,22 +90,6 @@ def package_metadata_row(metadata_row):
     if opening4:
         openings.append(opening4)
 
-    captured_pieces = {
-        'queen': captured_queens,
-        'rook': captured_rooks,
-        'knight': captured_knights,
-        'bishop': captured_bishops,
-        'pawn': captured_pawns,
-    }
-
-    captures_by_piece = {
-        'king': capturing_kings,
-        'queen': capturing_queens,
-        'rook': capturing_rooks,
-        'knight': capturing_knights,
-        'bishop': capturing_bishops,
-        'pawn': capturing_pawns,
-    }
 
     return {
         'white_username': white_username,
@@ -109,29 +107,56 @@ def package_metadata_row(metadata_row):
         'captures': captures,
         'en_passants': en_passants,
         'promotions': promotions,
-        'captured_pieces': captured_pieces,
-        'captures_by_piece': captures_by_piece,
+        'captured_pieces': {
+            'queen': captured_queens,
+            'rook': captured_rooks,
+            'knight': captured_knights,
+            'bishop': captured_bishops,
+            'pawn': captured_pawns,
+        },
+        'captures_by_piece': {
+            'king': capturing_kings,
+            'queen': capturing_queens,
+            'rook': capturing_rooks,
+            'knight': capturing_knights,
+            'bishop': capturing_bishops,
+            'pawn': capturing_pawns,
+        }
     }
+
+
+def get_connection():
+    """ Returns a connection to the database described in the
+        config module. May raise an exception as described in the
+        documentation for psycopg2.connect. """
+    return psycopg2.connect(database=config.database,
+                            user=config.user,
+                            password=config.password)
 
 
 
 @api.route('/games', strict_slashes=False)
 def get_games_list():
+    """Generates a JSON list of games filtered by GET parameters"""
+
 
     args = flask.request.args
-    # print(args)
 
     query = f'''
-        SELECT games.id, { GAME_METADATA_FIELDS }
+        SELECT games.id,
+        { GAME_METADATA_FIELDS }
         FROM games
         { GAME_METADATA_TABLE_JOINS }
         WHERE 1 = 1
     '''
 
 
+    # The arguments passed into our SQL query when we execute it
     db_args = []
 
+
     if 'user' in args:
+        # Filter by username or partial username of either player
         query += '''
             AND (users_white.username ILIKE CONCAT('%%', %s, '%%') OR users_black.username ILIKE CONCAT(%s, '%%'))
         '''
@@ -140,6 +165,7 @@ def get_games_list():
 
 
     if 'turns' in args:
+        # Filter by exact number of turns
         query += '''
             AND games.turns = %s
         '''
@@ -147,6 +173,7 @@ def get_games_list():
 
 
     if 'rating_max' in args:
+        # Filter by maximum rating of both player
         query += '''
             AND games.white_player_rating <= %s AND games.black_player_rating <= %s
         '''
@@ -155,19 +182,24 @@ def get_games_list():
 
 
     if 'rating_min' in args:
+        # Filter by minimum rating of one player
         query += '''
             AND (games.white_player_rating >= %s OR games.black_player_rating >= %s)
         '''
         db_args.append(args['rating_min'])
         db_args.append(args['rating_min'])
 
+
     if 'opening_moves' in args:
+        # Filter by opening moves
+        # NOte that the API uses dashes between moves, while the database uses spaces
         query += '''
             AND REPLACE(games.moves, ' ', '-') ILIKE CONCAT(%s, '%%')
         '''
         db_args.append(args['opening_moves'])
     
 
+    # Sort the results by player rating descending
     query += '''
         ORDER BY CASE WHEN games.white_player_rating > games.black_player_rating
             THEN games.white_player_rating
@@ -177,6 +209,7 @@ def get_games_list():
 
 
     if ('page_id' in args and args['page_id'].isdigit()) or ('page_size' in args and args['page_size'].isdigit()):
+        # If either page_id or page_size is specified, return only a page of results
 
         # defaults
         page_size = 25
@@ -192,10 +225,6 @@ def get_games_list():
         except:
             pass
 
-        # print('page size is ', page_size)
-        # print(type(page_size))
-        # print('page id is', page_id)
-        # print(type(page_id))
 
         query += '''
             LIMIT %s OFFSET %s
@@ -205,8 +234,7 @@ def get_games_list():
 
 
     query += ";"
-
-    print(query)
+    # print(query)
 
 
     games_list = []
@@ -233,9 +261,15 @@ def get_games_list():
 
 @api.route('/game/<game_id>/')
 def get_game(game_id):
+    """Get the full game data of a particular game id.
+        As well as returning the game metadata, this API endpoint returns the moves
+        list, the board positions after every turn, and the type of piece captured
+        after every turn. Some of this data is generated on each API call -- it is
+        not stored in the database. """
 
     query = f'''
-        SELECT games.moves, { GAME_METADATA_FIELDS }
+        SELECT games.moves,
+        { GAME_METADATA_FIELDS }
         FROM games
         { GAME_METADATA_TABLE_JOINS}
         WHERE games.id = %s;
@@ -243,36 +277,36 @@ def get_game(game_id):
 
     game_data = {}
     try:
+        # Connect to database and execute SQL query
         connection = get_connection()
         cursor = connection.cursor()
         cursor.execute(query, (game_id,))
 
-
+        # Fetch only one row -- we're assuming that the SQL query outputs only one row anyway
         result = cursor.fetchone()
-        if result:
 
+        if result:
             moves = result[0]
 
-            # Generate board positions and captured pieces for each turn, from the list of moves
-
+            # Generate board positions and captured pieces from the list of moves
             board = chess.Board()
             board_positions = []
             captured = []
-
-            board_positions.append(str(board).replace(" ", "").replace('\n', "/"))
             captured = []
 
-            # print(moves)
+            format_board = lambda x: str(x).replace(" ", "").replace('\n', "/")
+
+
+            board_positions.append(format_board(board))
             for move_string in moves.split(" "):
                 move = board.parse_san(move_string)
-                # print(f"Move is {move}")
 
                 piece_type = chess_util.captured_piece_type(board, move)
                 if piece_type == None:
                     piece_type = ""
 
                 board.push(move)
-                board_positions.append(str(board).replace(" ", "").replace('\n', "/"))
+                board_positions.append(format_board(board))
                 captured.append(piece_type)
 
 

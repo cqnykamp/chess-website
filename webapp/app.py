@@ -1,7 +1,10 @@
-'''
+"""
 Charles Nykamp and Barry Nwike
 Carleton College Software Design Class, Fall 2022
-'''
+
+The main file for this app's server code
+This app has two HTTP endpoints, as well as endpoints for the API
+"""
 
 
 import flask
@@ -24,22 +27,12 @@ def game(game_id):
 
     game_data = json.loads(api.get_game(game_id))
 
-    # game_data = {
-    #     'white_username': 'asdfadsf',
-    #     'white_rating': 12345,
-    #     'black_username': 'theBestChessPlayerEver',
-    #     'black_rating': 600,
-    #     'moves': "a1 b2 c3 Qxa4+",
-    #     'winner': 'black',
-    #     'victory_status': 'outoftime',
-    #     'turns': 4,
-    # }
-
     if 'moves' in game_data:
         # We assume that there is a game with this id
         return flask.render_template('game.html', game_data=game_data)
     else:
         return flask.render_template('no_game_found.html')
+
 
 
 if __name__ == '__main__':

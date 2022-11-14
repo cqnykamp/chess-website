@@ -2,28 +2,17 @@ api-design
 Charles Nykamp and Barry Nwike
 
 
-
 This API has two different endpoints:
 1. An endpoint which returns the game data of a particular game id
 2. An endpoint that returns game metadatas of all games which fit search criteria
 
+------------------------------------------------------------------------------------------------------------------
 
 REQUEST: /game/<game_id>
     Returns the game data of the given game_id
 
 RESPONSE: A JSON dictionary of the game data. The dictionary fields are:
-
-    white_username -- (TEXT)
-    white_rating ---- (INTEGER)
-    black_username -- (TEXT)
-    black_rating ---- (INTEGER)
-    turns ----------- (INTEGER) the number of moves in the game
-    victory_status -- (TEXT) such as draw, outoftime, mate
-    winner ---------- (TEXT) one of three values: "black", "white", or "draw"
-    rated_status ---- (BOOLEAN) either the game is a rated match or not 
-    opening_names ---- (LIST OF TEXT) A list where each string gives a chess opening of this game
-    increment_code -- (TEXT) what the time rules were when the game was played. Ex: 15+2
-
+    
     moves ----------- (TEXT) a string sequence of every move made in the game
     board_positions - (LIST OF TEXT) the state of the board at every turn. Each element in the list is
                         a 71-character-long string, where each character represents one square, except for
@@ -32,27 +21,10 @@ RESPONSE: A JSON dictionary of the game data. The dictionary fields are:
     captured_pieces - (LIST OF TEXT) the piece captured, if there was one, after each turn. Each element in
                         the list is either a 1-character-long string or an empty string, if no piece was
                         captured that turn. See below for a table of which characters correspond to which pieces.
-
-Char | Piece
---------------
-.       empty square
-/       end of board row
-
-P       white pawn
-R       white rook
-N       white knight
-B       white bishop
-K       white king
-Q       white queen
-
-p       black pawn
-r       black rook
-n       black knight
-b       black bishop
-k       black king
-q       black queen
+    ... the game metadata fields, see table below
 
 
+------------------------------------------------------------------------------------------------------------------
 
 REQUEST: /games[<search_criteria>]
     Request a list of all games which match a certain search criteria. The search criteria is specified by GET parameters.
@@ -82,6 +54,19 @@ RESPONSE: A JSON list of dictionaries, where each dictionary contains data about
     rating of the higher-ranked player. The fields of each game dictionary are:
 
     game_id --------- (TEXT) this id can be used to request the full game data (see /game/<game_id> endpoint)
+    ... the game metadata fields, see table below
+
+    Notice that these fields do include data about the content of the game. Use /game/<game_id> for full game data.
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------
+
+
+Game Metadata Fields
+------------------------
     white_username -- (TEXT)
     white_rating ---- (INTEGER)
     black_username -- (TEXT)
@@ -90,8 +75,25 @@ RESPONSE: A JSON list of dictionaries, where each dictionary contains data about
     victory_status -- (TEXT) such as draw, outoftime, mate
     winner ---------- (TEXT) one of three values: "black", "white", or "draw"
     rated_status ---- (BOOLEAN) either the game is a rated match or not 
-    opening_names ---- (LIST OF TEXT) A list where each string gives a chess opening of the game
+    opening_names ---- (LIST OF TEXT) A list where each string gives a chess opening of this game
     increment_code -- (TEXT) what the time rules were when the game was played. Ex: 15+2
 
 
-    Notice that these fields do include data about the content of the game. Use /game/<game_id> for full game data.
+Char | Piece
+--------------
+.       empty square
+/       end of board row
+
+P       white pawn
+R       white rook
+N       white knight
+B       white bishop
+K       white king
+Q       white queen
+
+p       black pawn
+r       black rook
+n       black knight
+b       black bishop
+k       black king
+q       black queen

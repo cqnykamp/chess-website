@@ -79,11 +79,6 @@ nav img {
 
 
 footer{
-    /* position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0; */
-
     height: 2em;
     margin-top: 1em;
 
@@ -221,18 +216,18 @@ li img{
 }
 
 
+/* Alternate colors for search result rows */
 #searchResults tr:nth-child(even) {
     background-color: white;
 }
-
-
 #searchResults tr:nth-child(odd) {
     background-color: #ebebeb;
 }
 
-#searchResults table {
+
+/* #searchResults table {
     position: relative;
-}
+} */
 
 #searchResults .details {
     /* border-left: 1px dotted; */

@@ -107,6 +107,12 @@ function search(parameters) {
                 <td>
                     ${game.opening_names.join("<br>")}
                 </td>
+                <td>
+                    Checks: ${game.checks}<br/>
+                    Captures: ${game.captures}<br/>
+                    Promotions: ${game.promotions}<br/>
+                    En passants: ${game.en_passants}
+                </td>
 
                 <td class='details'><a href='${ getBaseURL() }/game/${ game_id }'>View</td>
 
@@ -121,6 +127,7 @@ function search(parameters) {
                 <tr>
                     <th>Game</th>
                     <th>Opening</th>
+                    <th>Stats</th>
 
                     <th class='details'>Details</th>
                 </tr>
