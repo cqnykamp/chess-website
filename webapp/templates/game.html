@@ -4,9 +4,6 @@
 <script>
     var boardPositions = JSON.parse('{{ game_data.board_positions|tojson }}');
     var capturedPieces = JSON.parse('{{ game_data.captured_pieces|tojson }}');
-
-    var intervalForward;
-    var intervalBack;
 </script>
 
 <script type='text/javascript' src="{{ url_for('static', filename='game.js') }}"></script>
@@ -58,31 +55,35 @@
                 <div class="inline">
                     <h3>Moves: <span id="turn-counter">0</span>/{{ game_data.turns }}</h3>
                     <button
-                        onmousedown="clearInterval(intervalBack); previousTurn(); intervalForward=setInterval(previousTurn, 200)"
-                        onmouseup="clearInterval(intervalForward)"
+                        onmousedown="startMovingBackward()"
+                        onmouseup="stopMoving()"
+                        onmouseout="stopMoving()"
                     >&#9668; Back</button>
                     <button
-                        onmousedown="clearInterval(intervalForward); nextTurn(); intervalBack=setInterval(nextTurn, 200)"
-                        onmouseup="clearInterval(intervalBack)"
-                    >Forward &#9658;</button>
+                        onmousedown="startMovingForward()"
+                        onmouseup="stopMoving()"
+                        onmouseout="stopMoving()"
+                >Forward &#9658;</button>
                 </div>
 
                 <div id="moves-list">{{ game_data.moves }}</div>
 
             </div>
 
-            
-            <div class="panel">
-                <h3>Captured</h3>
-                <div id='captured'></div>
-            </div>
-
+        
         
 
         </div>
 
+        <div class='split'>
+            <div class="panel">
+                <h3>Captured</h3>
+                <div id='captured'></div>
+            </div>
+    
+            <table id="gameboard" class="split"></table>    
+        </div>
 
-        <table id="gameboard" class="split"></table>
 
     </div>
 

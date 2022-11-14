@@ -215,6 +215,28 @@ function previousTurn() {
     }
 }
 
+var intervalForward;
+var intervalBack;
+
+
+function startMovingForward() {
+    stopMoving();
+    nextTurn();
+    intervalForward = setInterval(nextTurn, 200);
+}
+
+function startMovingBackward() {
+    stopMoving();
+    previousTurn();
+    intervalForward = setInterval(previousTurn, 200);
+}
+
+
+function stopMoving() {
+    clearInterval(intervalForward);
+    clearInterval(intervalBack);
+}
+
 
 window.onload = loadPage;
 window.onresize = drawBoard;
