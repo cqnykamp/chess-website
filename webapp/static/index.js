@@ -35,11 +35,14 @@ function urlExtend(search_parameters){
 
 function onSearchButtonClicked() {
 
+    let opening_moves_unparsed = document.getElementById("startmove_search").value;
+    let opening_moves = opening_moves_unparsed.split(" ").join("-");
+
     // console.log('Search button clicked');
     var parameters = {
         // These keys should match the API parameter names
         user: document.getElementById('user_search').value, 
-        opening_moves: document.getElementById("startmove_search").value, 
+        opening_moves: opening_moves,
         turns: document.getElementById("movenumb_search").value, 
         rating_max:  document.getElementById("above_rate_search").value,
         rating_min: document.getElementById("below_rate_search").value,
@@ -74,22 +77,6 @@ function search(parameters) {
         var listBody = '';
         for (let game of games) {
             var game_id = game.game_id
-
-            // listBody += `<tr>
-            //     <td>${game['white_username'] }</td>
-            //     <td>${game['white_rating']}</td>
-            //     <td>${game['black_username'] }</td>
-            //     <td>${game['black_rating']}</td>
-            //     <td>${game['turns']}</td>
-            //     <td>${game['victory_status']}</td>
-            //     <td>${game['winner']}</td>
-            //     <td>${game['rated_status']}</td>
-            //     <td>${game['opening_name']}</td>
-            //     <td>${game['increment_code']}</td>
-
-            //     <td class='details'><a href='${ getBaseURL() }/game/${ game_id }'>View</td>
-
-            // </a></tr>\n`;
 
             let outcome = 'draw'
             if(game.winner != 'draw') {
@@ -134,26 +121,6 @@ function search(parameters) {
                 ${listBody}
             </table>`;
 
-
-
-
-            // searchResultsElement.innerHTML = `<table>
-            //     <tr>
-            //         <th>White username</th>
-            //         <th>White rating</th>
-            //         <th>Black username</th>
-            //         <th>Black rating</th>
-            //         <th>Turns</th>
-            //         <th>Victory status</th>
-            //         <th>Winner</th>
-            //         <th>Rated</th>
-            //         <th>Opening</th>
-            //         <th>Increment</th>
-
-            //         <th class='details'>Details</th>
-            //     </tr>
-            //     ${listBody}
-            // </table>`;
 
 
         }

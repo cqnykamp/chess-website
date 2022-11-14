@@ -1,8 +1,7 @@
 
 const boardScreenHeightUsage = 0.65;
 
-// The gameboard should never take up more than this percentage of the
-// screen width
+// The gameboard should never take up more than this percentage of the screen width
 const boardMaxScreenWidthUsage = 0.8;
 
 var moveCount = 0;
@@ -36,36 +35,6 @@ function initialBoardPosition() {
     return board;
 }
 
-
-/**
- * Given a move such as Nxf3+, find which piece we're referring to by finding its position before the move
- * Returns (y-pos, x-pos) as indices
- * @param move the move string
- */
-function findMovingPiecePosition(move) {
-
-    unparsedMove 
-
-    let pieceType;
-    if(move[0] == 'K') {
-        pieceType = 'king';
-
-    } else if(move[0] == 'Q') {
-        pieceType = 'queen';
-    } else if(move[0] == 'R') {
-        pieceType = 'rook';
-    } else if(move[0] == 'B') {
-        pieceType = 'bishop';
-    } else if(move[0] == 'N') {
-        pieceType = 'knight';
-    } else {
-        // no letter
-        pieceType = 'pawn';
-    }
-
-
-
-}
 
 
 function loadPage() {

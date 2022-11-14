@@ -38,7 +38,11 @@
             <div class="panel">
                 <b>Winner:</b> {{ game_data.winner }}<br/>
                 <b>Victory status:</b> {{ game_data.victory_status }}<br/>
-                <b>Openings:</b> {{ game_data.opening_names }}<br/>
+                <b>Openings:</b>
+
+                {% for opening in game_data.opening_names %}
+                    {{ opening }}{% if not loop.last %},{% endif %}
+                {% endfor %}
             </div>
 
             <div class="panel">
