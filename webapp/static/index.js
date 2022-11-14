@@ -62,6 +62,8 @@ function onSearchButtonClicked() {
 
 function search(parameters) {
 
+    console.log("search");
+
     // console.log(parameters);
 
     var url = getAPIBaseURL() + '/games' + urlExtend(parameters);
@@ -143,7 +145,32 @@ function search(parameters) {
 function initialize() {
     var button = document.getElementById('searchbutton');
     button.onclick = onSearchButtonClicked;
+
+    document.getElementById("user_search").addEventListener("keyup", handleSearchKeyDown);
+    document.getElementById("below_rate_search").addEventListener("keyup", handleSearchKeyDown);
+    document.getElementById("above_rate_search").addEventListener("keyup", handleSearchKeyDown);
+
+    document.getElementById("opening_name_search").addEventListener("keyup", handleSearchKeyDown);
+    document.getElementById("opening_moves_search").addEventListener("keyup", handleSearchKeyDown);
+
+    document.getElementById("moves_search").addEventListener("keyup", handleSearchKeyDown);
+    document.getElementById("movenumb_search").addEventListener("keyup", handleSearchKeyDown);
+
+    document.getElementById("checks_search").addEventListener("keyup", handleSearchKeyDown);
+    document.getElementById("captures_search").addEventListener("keyup", handleSearchKeyDown);
+    document.getElementById("castles_search").addEventListener("keyup", handleSearchKeyDown);
+    document.getElementById("en_passants_search").addEventListener("keyup", handleSearchKeyDown);
+
 }
+
+
+function handleSearchKeyDown(e) {
+    if(e.keyCode == 13) {
+        //Enter
+        onSearchButtonClicked();
+    }
+}
+
 
 // This causes initialization to wait until after the HTML page and its
 // resources are all ready to go, which is often what you want. This

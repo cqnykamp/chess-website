@@ -42,6 +42,13 @@ button:hover {
     background-color: #094074;
 }
 
+/* input[type='number'] {
+    width: 3em;
+} */
+
+
+
+
 
 
 
@@ -146,15 +153,15 @@ footer{
     ======= Homepage specific =======
 **/
 
-input{
+/* input{
     transition: width 0.4s ease-in-out;
   }
   
 input:focus {
     width: 40%;
-}
+} */
 
-.search button{
+#searchbutton{
     padding-left: 3em;
     padding-right: 3em;
     padding-top: 0.5em;
@@ -206,6 +213,12 @@ input:focus {
     list-style-type: none;
     padding-inline-start: 0px;
 }
+
+.searchfunction td {
+    width: 15vw;
+    vertical-align: top;
+}
+
 
 #homeicon{
     float: left;
