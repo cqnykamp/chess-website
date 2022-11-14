@@ -184,6 +184,18 @@ function drawBoard() {
 
     document.getElementById("captured").innerHTML = captured;
 
+
+
+    let moves = document.getElementById("moves-list").children[0].children;
+
+    for(let i=0; i < moveCount; i++) {
+        moves[i].classList.add(["played"])
+    }
+
+    for(let i=moveCount; i < moves.length; i++) {
+        moves[i].classList.remove(["played"])
+    }
+
 }
 
 

@@ -225,7 +225,26 @@ li img{
     background-color: #ebebeb;
 }
 
+#searchResults table {
+    position: relative;
+}
 
+#searchResults .details {
+    /* border-left: 1px dotted; */
+    font-size: smaller;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+  
+/* 
+.rowlink::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+} */
 
 
 
@@ -272,9 +291,20 @@ li img{
     column-gap: 7em;
 }
 
+#moves-panel .played {
+    font-weight: bold;
+}
+
+
+/* #moves-panel li {
+    display: inline;
+    margin-right: 0.5em;
+} */
+
 
 #captured {
-    display: flex;    
+    display: flex;
+    flex-wrap: wrap;
 }
 
 #captured img {

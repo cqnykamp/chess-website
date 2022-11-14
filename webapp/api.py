@@ -207,7 +207,7 @@ def get_game(game_id):
                         else:
                             to_square -= 8
 
-                    captured_piece_type = board.piece_type_at(to_square)
+                    captured_piece_type = board.piece_at(to_square).symbol()
 
                 board.push(move)
                 board_positions.append(str(board).replace(" ", "").replace('\n', "/"))

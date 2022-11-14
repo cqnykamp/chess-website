@@ -64,13 +64,15 @@ function onSearch() {
             var game_id = game.game_id
 
             listBody += `<tr>
-                <td><a href=` + getBaseURL() +'/game/'+game_id+ `>${ game['white_username'] }</a></td>
+                <td>${game['white_username'] }</a></td>
                 <td>${game['white_rating']}</td>
-                <td>${ game['black_username'] }</td>
+                <td>${game['black_username'] }</td>
                 <td>${game['black_rating']}</td>
                 <td>${game['turns']}</td>
                 <td>${game['victory_status']}</td>
                 <td>${game['winner']}</td>
+                <td class='details'><a href='${ getBaseURL() }/game/${ game_id }'>View</td>
+
             </a></tr>\n`;
 
         }
@@ -86,6 +88,7 @@ function onSearch() {
                     <th>Turns</th>
                     <th>Victory status</th>
                     <th>Winner</th>
+                    <th class='details'>Details</th>
                 </tr>
                 ${listBody}
             </table>`;
