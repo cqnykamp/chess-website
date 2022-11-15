@@ -22,9 +22,9 @@
             <td class="panel without-space-below">
                 <h3>Players</h3>
                 <ul>
-                    <li><em>Username </em><br/><input id = "user_search" placeholder="ex: avocado" onkeydown="handleSearchKeyDown(event)"></li>
-                    <li><em>Rating min </em><br/><input id="below_rate_search" type="number" onkeydown="handleSearchKeyDown(event)"></li>
-                    <li><em>Rating max </em><br/><input id="above_rate_search" type="number" onkeydown="handleSearchKeyDown(event)"></li>
+                    <li><em>Username </em><br/><input id = "user_search" placeholder="ex: avocado"></li>
+                    <li><em>Rating min </em><br/><input id="below_rate_search" type="number" step="20"></li>
+                    <li><em>Rating max </em><br/><input id="above_rate_search" type="number" step="20"></li>
                 </ul>
             </td>
         
@@ -35,10 +35,10 @@
                         
                         <!-- <select id="winner_search"> -->
 
-                        <input type="radio" name="winner_search">Any</input><br/>
-                        <input type="radio" name="winner_search">Black</input><br/>
-                        <input type="radio" name="winner_search">White</input><br/>
-                        <input type="radio" name="winner_search">Draw</input><br/>
+                        <input type="radio" name="winner-search" value="">Any</input><br/>
+                        <input type="radio" name="winner-search" value="black">Black</input><br/>
+                        <input type="radio" name="winner-search" value="white">White</input><br/>
+                        <input type="radio" name="winner-search" value="draw">Draw</input><br/>
 
 
                         <!-- <option>Black</option> -->
@@ -62,26 +62,29 @@
             <td class="panel without-space-below">
                 <h3>Opening</h3>
                 <ul>
-                    <li><em>Opening name</em><br/><input id = "opening_name_search" placeholder="ex: scandinavian" onkeydown="handleSearchKeyDown(event)"></li>
-                    <li><em>Opening moves</em><br/><input id = "opening_moves_search" placeholder="ex: e4 e5" onkeydown="handleSearchKeyDown(event)"></li>
+                    <li><em>Opening name</em><br/><input id = "opening_name_search" placeholder="ex: scandinavian"></li>
+                    <li><em>Opening moves</em><br/><input id = "opening_moves_search" placeholder="ex: e4 e5"></li>
                 </ul>        
             </td>
         
             <td class="panel without-space-below">
                 <h3>Gameplay</h3>
                 <ul>
-                    <li><em>Moves </em><br/><input id = "moves_search" placeholder="ex: Qxf4" onkeydown="handleSearchKeyDown(event)"></li>
-                    <li><em>Move count</em><br/><input id = "movenumb_search" type="number" onkeydown="handleSearchKeyDown(event)"></li>    
+                    <li><em>Moves </em><br/><input id = "moves_search" placeholder="ex: Qxf4"></li>
+                    <li><em>Move count</em><br/><input id = "movenumb_search" type="number"></li>    
                 </ul>        
             </td>
         
             <td class="panel without-space-below">
                 <h3>Stats</h3>
                 <ul>
-                    <li><em>Checks</em><br/><input id = "checks_search" type="number" autocomplete="off" onkeydown="handleSearchKeyDown(event)"></li>    
-                    <li><em>Captures </em><br/><input id = "captures_search" type="number" onkeydown="handleSearchKeyDown(event)"></li>
-                    <li><em>Castles </em><br/><input id = "castles_search" type="number" onkeydown="handleSearchKeyDown(event)"></li>
-                    <li><em>En passants </em><br/><input id = "en_passants_search" type="number" onkeydown="handleSearchKeyDown(event)"></li>
+                    <li><em>Checks</em><br/><input id = "checks_search" type="number"></li>    
+                    <li><em>Captures </em><br/><input id = "captures_search" type="number"></li>
+                    <li><em>Promotions </em><br/><input id = "promotions_search" type="number"></li>
+                    <li><em>Castles </em><br/><input id = "castles_search" type="number"></li>
+                    <li><em>En passants </em><br/><input id = "en_passants_search" type="number"></li>
+
+
                 </ul>        
             </td>
         
@@ -91,21 +94,8 @@
 
     <div class="centered">
         <button id ="searchbutton" style="text-shadow: 100px;">Search</button>
-    </div>
-    
-
-
-<!-- 
-    <ul id = "filterList" style ="list-style: none;">
-        <li>Moves:
-        </li>
-        <li> Opening moves: 
-            <input id = "opening_moves_search" placeholder="ex: e4 e5">
-        </li>
-    </ul>     -->
-
+    </div>    
 </div>
-
 
 
 
@@ -136,7 +126,9 @@
 
 
 <div id="content-right">
-    <div id="searchResults" class="info-table centered"></div>
+    <div id="searchResults" class="info-table centered">
+        <!-- <img id = "homeicon" src ="{{ url_for('static', filename='images/knight-white.png') }}"> -->
+    </div>
 </div>
 
 

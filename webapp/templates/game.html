@@ -70,21 +70,29 @@
                 >Forward &#9658;</button>
                 </div>
 
-                <div id="moves-list">{{ game_data.moves }}</div>
+                <em>Arrow keys to move</em><br/>
+                <em>Click to jump</em>
+
+                <div id="moves-list">
+                    <ol>
+                    {% set moves = game_data.moves.split(' ') %}
+                    {% for i in range(0, moves|length) %}
+                        <li onclick="setMove(Number('{{i}}') + 1)">{{ moves[i] }} </li>
+                    {% endfor %}
+                    </ol>                        
+                </div>    
 
             </div>
 
-        
+            <div class="panel">
+                <h3>Captured</h3>
+                <div id='captured'></div>
+            </div>
         
 
         </div>
 
         <div class='split'>
-            <div class="panel">
-                <h3>Captured</h3>
-                <div id='captured'></div>
-            </div>
-    
             <table id="gameboard" class="split"></table>    
         </div>
 

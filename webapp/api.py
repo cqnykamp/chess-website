@@ -105,6 +105,7 @@ def package_metadata_row(metadata_row):
 
         'checks': checks,
         'captures': captures,
+        'castles': castles,
         'en_passants': en_passants,
         'promotions': promotions,
         'captured_pieces': {
@@ -217,7 +218,46 @@ def get_games_list():
         db_args.append(args['opening_name'])
         db_args.append(args['opening_name'])
         db_args.append(args['opening_name'])
+
+
+    if 'checks' in args:
+        query += '''
+            AND games.checks = %s
+        '''
+        db_args.append(args['checks'])
+
+
+    if 'captures' in args:
+        query += '''
+            AND games.captures = %s
+        '''
+        db_args.append(args['captures'])
+
+
+    if 'castles' in args:
+        query += '''
+            AND games.castles = %s
+        '''
+        db_args.append(args['castles'])
+
+
+    if 'en_passants' in args:
+        query += '''
+            AND games.en_passants = %s
+        '''
+        db_args.append(args['en_passants'])
+
     
+    if 'winner' in args:
+        value = args['winner'].lower()
+
+        if value=='white' or value=='black' or value=='draw':
+            query += '''
+                AND games.winner = %s
+            '''
+            db_args.append(value)
+
+
 
     # Sort the results by player rating descending
     query += '''

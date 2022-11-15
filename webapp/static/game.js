@@ -16,48 +16,23 @@ function getStaticFolderURL() {
 }
 
 
-function initialBoardPosition() {
-    let board = Array.from({ length: 8 }, () => 
-    Array.from({ length: 8 }, () => "")
-    );
-
-    let special_pieces = ['rook', 'knight', 'bishop', 'king', 'queen', 'bishop', 'knight', 'rook'];
-    for(let [id, piece] of special_pieces.entries()) {
-        board[0][id] = piece + '-white';
-    }
-    for(let [id, piece] of special_pieces.entries()) {
-        board[7][id] = piece + '-black';
-    }
-
-    board[1] = Array.from({length: 8}, () => 'pawn-white')
-    board[6] = Array.from({length: 8}, () => 'pawn-black')
-
-    return board;
-}
-
-
-
 function loadPage() {
 
-    let moves_elem = document.getElementById("moves-list");
-    
-    let moves_formatted = "<ol>";
-    for(let move of moves_elem.innerHTML.split(" ")) {
-        moves_formatted += `<li>${move}</li>`;
-    }
-    moves_formatted += "</ol>";
-
-    moves_elem.innerHTML = moves_formatted;
-
-
-
-    // console.log(capturedPieces);
-
+    // let moves_elem = document.getElementById("moves-list");    
+    // let moves_formatted = "<ol>";
+    // for(let move of moves_elem.innerHTML.split(" ")) {
+    //     moves_formatted += `<li>${move}</li>`;
+    // }
+    // moves_formatted += "</ol>";
+    // moves_elem.innerHTML = moves_formatted;
 
     drawBoard();
 }
 
 
+/**
+ * Convert from the symbols the API returns to chess pieces names
+ */
 function symbolToImageName(symbol) {
     switch(symbol) {
         case 'P': return 'pawn-white';
@@ -77,6 +52,9 @@ function symbolToImageName(symbol) {
     }
 }
 
+/**
+ * Convert from chess pieces names to image relative paths
+ */
 function chessPieceImageHTML(pieceName) {
     return `<img src='${getStaticFolderURL()}/images/${pieceName}.png' />`;
 }
@@ -84,8 +62,6 @@ function chessPieceImageHTML(pieceName) {
 
 
 function drawBoard() {
-
-    // let board = initialBoardPosition();
 
     // let screenHeight = document.body.clientHeight;
     // let screenWidth = document.body.clientWidth;
@@ -99,8 +75,6 @@ function drawBoard() {
     let boardSize = Math.min(widthConstraint, heightConstraint);
 
     let squareSize = boardSize / 8;
-    // console.log(`Square size is ${squareSize}`);
-
 
     let board = boardPositions[moveCount].split("/");
 
@@ -168,11 +142,20 @@ function drawBoard() {
 }
 
 
+function setMove(move) {
+if(move < boardPositions.length && move >= 0) {
+    moveCount = move;
+    document.getElementById("turn-counter").innerHTML = moveCount;
+    drawBoard();
+}
+
+}
+
 function nextTurn() {
     if(moveCount + 1 < boardPositions.length) {
         moveCount += 1;
         document.getElementById("turn-counter").innerHTML = moveCount;
-        drawBoard()
+        drawBoard();
     }
 }
 
@@ -180,7 +163,7 @@ function previousTurn() {
     if(moveCount > 0) {
         moveCount -= 1;
         document.getElementById("turn-counter").innerHTML = moveCount;
-        drawBoard()
+        drawBoard();
     }
 }
 

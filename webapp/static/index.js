@@ -1,6 +1,7 @@
 
-
+// Stores the most recent result from calling the API
 var gamesData = []
+
 
 function getBaseURL() {
     return window.location.protocol
@@ -14,6 +15,56 @@ function getAPIBaseURL() {
 }
 
 
+/**
+ * Set up event listeners for input boxes and search button
+ */
+function initialize() {
+    var button = document.getElementById('searchbutton');
+    button.onclick = onSearch;
+
+    document.getElementById("user_search").addEventListener("keyup", handleSearchKeyUp);
+    document.getElementById("below_rate_search").addEventListener("keyup", handleSearchKeyUp);
+    document.getElementById("above_rate_search").addEventListener("keyup", handleSearchKeyUp);
+
+    document.getElementById("opening_name_search").addEventListener("keyup", handleSearchKeyUp);
+    document.getElementById("opening_moves_search").addEventListener("keyup", handleSearchKeyUp);
+
+    document.getElementById("moves_search").addEventListener("keyup", handleSearchKeyUp);
+    document.getElementById("movenumb_search").addEventListener("keyup", handleSearchKeyUp);
+
+    document.getElementById("checks_search").addEventListener("keyup", handleSearchKeyUp);
+    document.getElementById("captures_search").addEventListener("keyup", handleSearchKeyUp);
+    document.getElementById("promotions_search").addEventListener("keyup", handleSearchKeyUp);
+    document.getElementById("castles_search").addEventListener("keyup", handleSearchKeyUp);
+    document.getElementById("en_passants_search").addEventListener("keyup", handleSearchKeyUp);
+
+    let winnerOptions = document.getElementsByName("winner-search");
+    for(let option of winnerOptions) {
+        option.addEventListener("keyup", handleSearchKeyUp);
+    }
+}
+
+/**
+ * Event listener for search input elements.
+ * Enter key pressed while focusing on input element starts the search.
+ * @param {} e 
+ */
+function handleSearchKeyUp(e) {
+    if(e.keyCode == 13) {
+        //Enter
+        onSearch();
+    }
+}
+
+
+
+
+/**
+ * Generate the url parameters from a dictionary of key-values
+ * Only includes key if value is non-empty
+ * @param {*} search_parameters
+ * @returns url parameters string
+ */
 function urlExtend(search_parameters){
     var extension = "";
 
@@ -33,7 +84,10 @@ function urlExtend(search_parameters){
 }
 
 
-function onSearchButtonClicked() {
+/**
+ * Gather the input data from the DOM elements and enact API call with them
+ */
+function onSearch() {
 
     let opening_moves_unparsed = document.getElementById("opening_moves_search").value;
     let opening_moves = opening_moves_unparsed.replace("+", "%2B").replace(" ", "+");
@@ -41,35 +95,51 @@ function onSearchButtonClicked() {
     let moves_unparsed = document.getElementById("moves_search").value;
     let moves = moves_unparsed.replace("+", "%2B").replace(" ", "+");
 
-    // console.log('Search button clicked');
+    let winnerelems = document.getElementsByName("winner-search");
+    let winner = "";
+    for(let elem of winnerelems) {
+        if(elem.checked) {
+            winner = elem.value;
+        }
+    }
+
     var parameters = {
         // These keys should match the API parameter names
         user: document.getElementById('user_search').value, 
-        opening_moves: opening_moves,
-        moves: moves,
-        opening_name:  document.getElementById("opening_name_search").value, 
-        turns: document.getElementById("movenumb_search").value, 
-        rating_max:  document.getElementById("above_rate_search").value,
         rating_min: document.getElementById("below_rate_search").value,
+        rating_max:  document.getElementById("above_rate_search").value,
+    
+        opening_moves: opening_moves,
+        opening_name: document.getElementById("opening_name_search").value, 
+
+        moves: moves,
+        turns: document.getElementById("movenumb_search").value, 
+
+        checks: document.getElementById("checks_search").value,
+        captures: document.getElementById("captures_search").value,
+        promotions: document.getElementById("promotions_search").value,
+        castles: document.getElementById("castles_search").value,
+        en_passants: document.getElementById("en_passants_search").value,
+
+        winner: winner,
 
         // page_size: 10,
         page_id: 0,
     };
 
-    search(parameters);
+    callApiAndUpdateResults(parameters);
 }
 
-
-function search(parameters) {
-
-    console.log("search");
-
-    // console.log(parameters);
+/**
+ * Given a parameters object, construct the API url with those key-values,
+ * send the request, and display contents in DOM when server responds
+ * @param {*} parameters 
+ */
+function callApiAndUpdateResults(parameters) {
 
     var url = getAPIBaseURL() + '/games' + urlExtend(parameters);
+    console.log("search with url " + url);
 
-    // console.log("url is");
-    // console.log(url);
 
     fetch(url, {method: 'get'})
 
@@ -80,37 +150,31 @@ function search(parameters) {
         console.log("Response received");
         gamesData = games;
 
-        // console.log(games)
-        var listBody = '';
+
+        var resultsData = '';
         for (let game of games) {
-            var game_id = game.game_id
 
-            let outcome = 'draw'
-            if(game.winner != 'draw') {
-                outcome = game.winner + " won by " + game.victory_status;
-            }
+            let outcome_description = (game.winner=='draw' ? 'draw' : game.winner+" won by "+game.victory_status);
 
-            listBody += `<tr>
-                <td><a href='${ getBaseURL() }/game/${ game_id }'>View</td>
+            // One table row in the results table
+            resultsData += `<tr>
+                <td><a href='${ getBaseURL() }/game/${ game.game_id }'>View</td>
                 <td>
                 <h3>${game.white_username} (${game.white_rating}) vs ${game.black_username} (${game.black_rating})</h3>
                     ${game.turns} ${game.turns == 1? 'turn' : 'turns' },
-                    ${outcome},
-                    ${game.rated_status == 'true' ? 'rated' : 'not rated'},
+                    ${outcome_description},
                     ${game.increment_code}
+                    ${game.rated_status == 'true' ? 'rated' : 'not rated'},
                 </td>
                 <td>
                     ${game.opening_names.join("<br>")}
                 </td>
                 <td>
-                    
-                    <div>
-                        <div>Checks: ${game.checks}</div>
-                        <div>Captures: ${game.captures}</div>
-                        <div>Promotions: ${game.promotions}</div>
-                        <div>En passants: ${game.en_passants}</div>
-                    </div>
-
+                    <div>Checks: ${game.checks}</div>
+                    <div>Captures: ${game.captures}</div>
+                    <div>Promotions: ${game.promotions}</div>
+                    <div>Castles: ${game.castles}</div>
+                    <div>En passants: ${game.en_passants}</div>
                 </td>
 
             </a></tr>\n`;            
@@ -118,8 +182,9 @@ function search(parameters) {
         }
 
         var searchResultsElement = document.getElementById('searchResults');
-        if (searchResultsElement) {
 
+        if(games.length > 0) {
+            // Display results table with corresponding headers
             searchResultsElement.innerHTML = `
             <h1 class='panel without-space-below'>Results</h1>
             <table>
@@ -129,46 +194,18 @@ function search(parameters) {
                     <th>Openings</th>
                     <th>Stats</th>
                 </tr>
-                ${listBody}
+                ${resultsData}
             </table>`;
 
-
-
+        } else {
+            // No results
+            searchResultsElement.innerHTML = `<h1 class='panel without-space-below'>No results found</h1>`;
         }
     })
 
     .catch(function(error) {
         console.log(error);
     });
-}
-
-function initialize() {
-    var button = document.getElementById('searchbutton');
-    button.onclick = onSearchButtonClicked;
-
-    document.getElementById("user_search").addEventListener("keyup", handleSearchKeyDown);
-    document.getElementById("below_rate_search").addEventListener("keyup", handleSearchKeyDown);
-    document.getElementById("above_rate_search").addEventListener("keyup", handleSearchKeyDown);
-
-    document.getElementById("opening_name_search").addEventListener("keyup", handleSearchKeyDown);
-    document.getElementById("opening_moves_search").addEventListener("keyup", handleSearchKeyDown);
-
-    document.getElementById("moves_search").addEventListener("keyup", handleSearchKeyDown);
-    document.getElementById("movenumb_search").addEventListener("keyup", handleSearchKeyDown);
-
-    document.getElementById("checks_search").addEventListener("keyup", handleSearchKeyDown);
-    document.getElementById("captures_search").addEventListener("keyup", handleSearchKeyDown);
-    document.getElementById("castles_search").addEventListener("keyup", handleSearchKeyDown);
-    document.getElementById("en_passants_search").addEventListener("keyup", handleSearchKeyDown);
-
-}
-
-
-function handleSearchKeyDown(e) {
-    if(e.keyCode == 13) {
-        //Enter
-        onSearchButtonClicked();
-    }
 }
 
 
@@ -181,5 +218,4 @@ function handleSearchKeyDown(e) {
 // we are writing.
 window.onload = () => {
     initialize();
-    search({page_id: 0});
 };

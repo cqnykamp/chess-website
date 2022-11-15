@@ -40,11 +40,21 @@ GET Parameters:
                         Ex: /gameslist?rating_max=1600
     rating_min ----- (optional, default: 0) Only include games where at least one player is rated above this number
                         Ex /gameslist?rating_min=200
+
     moves ---------- (optional, default: "") Only include games which contain this move sequence
     opening_moves -- (optional, default: "") Only include games which start with these moves.
                             NOTE: The moves are specified in SAN format (Standard Algebraic Notation) separated by pluses.
                             For moves which contain plus signs such as Qf2+, escape them like Qf2%2B
     opening_name --- (optional, default: "") Only include games with this opening name or whose opening includes this opening name
+
+    checks --------- (optional, default: "") Only include games with exactly this many checks
+    captures ------- (optional, default: "") Only include games with exactly this many captures
+    castles -------- (optional, default: "") Only include games with exactly this many castles
+    en_passants ---- (optional, default: "") Only include games with exactly this many en_passants
+    promotions ----- (optional, default: "") Only include games with exactly this many promotions
+
+    winner --------- (optional, default: "") Valid values are: white, black, draw
+
     page_id -------- (optional, default: 0) Limit the data returned to a certain number of entries. 
     page_size ------ (optional, default: 10) The number of entries per page.
                             NOTE: If either page_id or page_size is specified as non-negative integers, the API will

@@ -42,9 +42,9 @@ button:hover {
     background-color: #094074;
 }
 
-/* input[type='number'] {
-    width: 3em;
-} */
+input[type='number'] {
+    width: 5em;
+}
 
 
 
@@ -114,6 +114,7 @@ footer{
 
 .split {
     margin-right: 1vw;
+    width: 45vw;
 }
 
 .inline {
@@ -190,7 +191,7 @@ input:focus {
 }
 
 
-.searchfunction{
+/* .searchfunction{ */
     /* display: float; */
     /* float: left; */
     /* position: sticky; */
@@ -206,8 +207,7 @@ input:focus {
     border: 1px solid black;
     text-align: left;
     vertical-align: center; */
-    
-}
+/* } */
 
 .searchfunction ul {
     list-style-type: none;
@@ -242,10 +242,9 @@ li img{
 }
 
 
-#content-right {
+/* #content-right { */
     /* margin-left: 25vw; */
-    
-}
+/* } */
 
 
 .info-table {
@@ -346,30 +345,33 @@ li img{
 }
 
 
-#moves-panel ol {
-    column-count: 3;
-    column-gap: 7em;
-}
-
-#moves-panel .played {
-    font-weight: bold;
-}
-
-
-/* #moves-panel li {
+#moves-panel li {
     display: inline;
-    margin-right: 0.5em;
-} */
+    cursor: pointer;
+}
+
+
+#moves-panel li:hover {
+    background-color: lightblue;
+
+}
+ 
+#moves-panel .played {
+    /* font-weight: bold; */
+    background-color: lightgray;
+}
 
 
 #captured {
     display: flex;
+    height: 5vh;
+    /* width: 45vw; */
     flex-wrap: wrap;
 }
 
 #captured img {
-    width: 2em;
-    height: 2em;
+    width: 1.5em;
+    height: 1.5em;
     object-fit: contain;
 }
 
