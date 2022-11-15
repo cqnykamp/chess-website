@@ -9,6 +9,8 @@ FEATURES CURRENTLY WORKING:
 
 
 FEATURES NOT YET WORKING:
+- Pagination. Search only returns the first page, no way to switch pages.
+- Sorting in the search.
 
 
 SETUP:

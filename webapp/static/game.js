@@ -17,15 +17,6 @@ function getStaticFolderURL() {
 
 
 function loadPage() {
-
-    // let moves_elem = document.getElementById("moves-list");    
-    // let moves_formatted = "<ol>";
-    // for(let move of moves_elem.innerHTML.split(" ")) {
-    //     moves_formatted += `<li>${move}</li>`;
-    // }
-    // moves_formatted += "</ol>";
-    // moves_elem.innerHTML = moves_formatted;
-
     drawBoard();
 }
 
