@@ -16,5 +16,3 @@ FEATURES NOT YET WORKING:
 SETUP:
 Before running app.py, install a python chess library:
 > pip install chess
-
-    

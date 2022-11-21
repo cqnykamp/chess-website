@@ -1,6 +1,9 @@
 
 // Stores the most recent result from calling the API
 var gamesData = []
+var visibleRows = 0
+
+const PAGE_SIZE = 50;
 
 
 function getBaseURL() {
@@ -124,7 +127,7 @@ function onSearch() {
         winner: winner,
 
         // page_size: 10,
-        page_id: 0,
+        // page_id: 0,
     };
 
     callApiAndUpdateResults(parameters);
@@ -140,6 +143,7 @@ function callApiAndUpdateResults(parameters) {
     var url = getAPIBaseURL() + '/games' + urlExtend(parameters);
     console.log("search with url " + url);
 
+    document.getElementById('searchResults').innerHTML = `<h1 class='panel without-space-below'>Loading...</h1>`;
 
     fetch(url, {method: 'get'})
 
@@ -147,46 +151,18 @@ function callApiAndUpdateResults(parameters) {
 
     .then(function(games) {
 
-        console.log("Response received");
+        // Make returned data globally accessible by this script
         gamesData = games;
 
-
-        var resultsData = '';
-        for (let game of games) {
-
-            let outcome_description = (game.winner=='draw' ? 'draw' : game.winner+" won by "+game.victory_status);
-
-            // One table row in the results table
-            resultsData += `<tr>
-                <td><a href='${ getBaseURL() }/game/${ game.game_id }'>View</td>
-                <td>
-                <h3>${game.white_username} (${game.white_rating}) vs ${game.black_username} (${game.black_rating})</h3>
-                    ${game.turns} ${game.turns == 1? 'turn' : 'turns' },
-                    ${outcome_description},
-                    ${game.increment_code}
-                    ${game.rated_status == 'true' ? 'rated' : 'not rated'},
-                </td>
-                <td>
-                    ${game.opening_names.join("<br>")}
-                </td>
-                <td>
-                    <div>Checks: ${game.checks}</div>
-                    <div>Captures: ${game.captures}</div>
-                    <div>Promotions: ${game.promotions}</div>
-                    <div>Castles: ${game.castles}</div>
-                    <div>En passants: ${game.en_passants}</div>
-                </td>
-
-            </a></tr>\n`;            
-
-        }
+        // Reset counter for the number of rows the results table is displaying
+        visibleRows = 0;
 
         var searchResultsElement = document.getElementById('searchResults');
 
         if(games.length > 0) {
             // Display results table with corresponding headers
             searchResultsElement.innerHTML = `
-            <h1 class='panel without-space-below'>Results</h1>
+            <h1 class='panel without-space-below'>Results (${games.length})</h1>
             <table>
                 <tr>
                     <th></th>
@@ -194,8 +170,9 @@ function callApiAndUpdateResults(parameters) {
                     <th>Openings</th>
                     <th>Stats</th>
                 </tr>
-                ${resultsData}
             </table>`;
+
+            loadMoreResults();
 
         } else {
             // No results
@@ -206,6 +183,54 @@ function callApiAndUpdateResults(parameters) {
     .catch(function(error) {
         console.log(error);
     });
+}
+
+
+function generateTableRows(games) {
+
+    var resultsData = '';
+    for (let game of games) {
+
+        let outcome_description = (game.winner=='draw' ? 'draw' : game.winner+" won by "+game.victory_status);
+
+        // One table row in the results table
+        resultsData += `<tr>
+            <td><a href='${ getBaseURL() }/game/${ game.game_id }'>View</td>
+            <td>
+            <h3>${game.white_username} (${game.white_rating}) vs ${game.black_username} (${game.black_rating})</h3>
+                ${game.turns} ${game.turns == 1? 'turn' : 'turns' },
+                ${outcome_description},
+                ${game.increment_code}
+                ${game.rated_status == 'true' ? 'rated' : 'not rated'}
+            </td>
+            <td>
+                ${game.opening_names.join("<br>")}
+            </td>
+            <td>
+                <div>Checks: ${game.checks}</div>
+                <div>Captures: ${game.captures}</div>
+                <div>Promotions: ${game.promotions}</div>
+                <div>Castles: ${game.castles}</div>
+                <div>En passants: ${game.en_passants}</div>
+            </td>
+
+        </a></tr>\n`;
+
+    }
+
+    return resultsData;
+}
+
+
+function loadMoreResults() {
+    let table = document.getElementById('searchResults').getElementsByTagName('table')[0];
+    let newRows = generateTableRows(gamesData.slice(visibleRows, visibleRows + PAGE_SIZE));
+    table.innerHTML += newRows;
+
+    visibleRows = Math.min(gamesData.length, visibleRows + PAGE_SIZE);
+
+    let moreResults = document.getElementById("more-results");
+    moreResults.innerHTML = (gamesData.length > visibleRows) ? `<button onclick='loadMoreResults();'>More results</button>` : '';
 }
 
 
