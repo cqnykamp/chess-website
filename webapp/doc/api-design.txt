@@ -28,32 +28,33 @@ RESPONSE: A JSON dictionary of the game data. The dictionary fields are:
 
 REQUEST: /games[<search_criteria>]
     Request a list of all games which match a certain search criteria. The search criteria is specified by GET parameters.
+    Multiple search parameters can be used, connected with an &
+    Ex: /games?rating_max=1600&user=hello
 
 GET Parameters:
-    user ----------- (optional, default:"") Only include games where this user played. The value is case-insensitive,
+    user ----------- (optional) Only include games where this user played. The value is case-insensitive,
                         and will also match any usernames which contain the given value.
-                        Ex: /gameslist?user=avocado
-    turns ---------- (optional, default: infinity, default comparitor: =) returns games played with a certain number of turns
-                    can be modified with + or - to obtain a list of games with turns above (+) or below (-) the specified number
-                    Ex: /gameslist?turns+15 *games with more than 15 turns*
-    rating_max ----- (optional, default: infinity) Only include games where both players are rated below this number
-                        Ex: /gameslist?rating_max=1600
-    rating_min ----- (optional, default: 0) Only include games where at least one player is rated above this number
-                        Ex /gameslist?rating_min=200
+                        Ex: /games?user=avocado
+    turns ---------- (optional) returns games played with a certain number of turns
+                    Ex: /games?turns+15 *games with more than 15 turns*
+    rating_max ----- (optional) Only include games where both players are rated below this number
+                        Ex: /games?rating_max=1600
+    rating_min ----- (optional) Only include games where at least one player is rated above this number
+                        Ex /games?rating_min=200
 
-    moves ---------- (optional, default: "") Only include games which contain this move sequence
-    opening_moves -- (optional, default: "") Only include games which start with these moves.
+    moves ---------- (optional) Only include games which contain this move sequence
+    opening_moves -- (optional) Only include games which start with these moves.
                             NOTE: The moves are specified in SAN format (Standard Algebraic Notation) separated by pluses.
                             For moves which contain plus signs such as Qf2+, escape them like Qf2%2B
-    opening_name --- (optional, default: "") Only include games with this opening name or whose opening includes this opening name
+    opening_name --- (optional) Only include games with this opening name or whose opening includes this opening name
 
-    checks --------- (optional, default: "") Only include games with exactly this many checks
-    captures ------- (optional, default: "") Only include games with exactly this many captures
-    castles -------- (optional, default: "") Only include games with exactly this many castles
-    en_passants ---- (optional, default: "") Only include games with exactly this many en_passants
-    promotions ----- (optional, default: "") Only include games with exactly this many promotions
+    checks --------- (optional) Only include games with exactly this many checks
+    captures ------- (optional) Only include games with exactly this many captures
+    castles -------- (optional) Only include games with exactly this many castles
+    en_passants ---- (optional) Only include games with exactly this many en passants
+    promotions ----- (optional) Only include games with exactly this many promotions
 
-    winner --------- (optional, default: "") Valid values are: white, black, draw
+    winner --------- (optional) Valid values are: white, black, draw
 
     page_id -------- (optional, default: 0) Limit the data returned to a certain number of entries. 
     page_size ------ (optional, default: 10) The number of entries per page.
@@ -68,7 +69,7 @@ RESPONSE: A JSON list of dictionaries, where each dictionary contains data about
     game_id --------- (TEXT) this id can be used to request the full game data (see /game/<game_id> endpoint)
     ... the game metadata fields, see table below
 
-    Notice that these fields do include data about the content of the game. Use /game/<game_id> for full game data.
+    Notice that these fields DO include data about the content of the game. Use /game/<game_id> for full game data.
 
 
 

@@ -53,12 +53,9 @@ function chessPieceImageHTML(pieceName) {
 
 
 function drawBoard() {
-
-    // let screenHeight = document.body.clientHeight;
-    // let screenWidth = document.body.clientWidth;
+    
     let screenHeight = window.innerHeight;
     let screenWidth = window.innerWidth;
-    // console.log(`Screen size is ${screenWidth} wide and ${screenHeight} tall`);
 
     let heightConstraint = screenHeight * boardScreenHeightUsage;
     let widthConstraint = screenWidth * boardMaxScreenWidthUsage;

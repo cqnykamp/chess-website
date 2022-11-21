@@ -9,10 +9,6 @@
 {% block content %}
 
 
-<!-- <input type="radio" name="winner_search">Any</input><br/>
-<input type="radio" name="winner_search">Black</input><br/>
-<input type="radio" name="winner_search">White</input><br/> -->
-
 
 <div class="searchfunction centered info-table">
 
@@ -33,25 +29,10 @@
                 <ul>
                     <li><em>Winner</em><br/>
                         
-                        <!-- <select id="winner_search"> -->
-
                         <input type="radio" name="winner-search" value="">Any</input><br/>
                         <input type="radio" name="winner-search" value="black">Black</input><br/>
                         <input type="radio" name="winner-search" value="white">White</input><br/>
                         <input type="radio" name="winner-search" value="draw">Draw</input><br/>
-
-
-                        <!-- <option>Black</option> -->
-                        <!-- <option>Black by checkmate</option>
-                        <option>Black by resign</option>
-                        <option>Black by clock</option> -->
-
-                        <!-- <option>White</option> -->
-                        <!-- <option>White by checkmate</option>
-                        <option>White by resign</option>
-                        <option>White by clock</option> -->
-
-                        <!-- <option>Draw</option> -->
 
                     </select></li>
                 </ul>        
@@ -98,38 +79,8 @@
 </div>
 
 
-
-<!-- <div class = "pageelements">
-    <div class = introduction>
-        <ul style ="list-style: none;">
-            <h2>Welcome to Analychess!</h2>
-            <p><img id = "homeicon" src ="{{ url_for('static', filename='images/knight-white.png') }}"></p>
-        </ul>
-    </div>
-
-</div>  
-
-<hr />
-
-
-<div class = "games">
-    <h2>Top Games of the Day:</h2>
-    <ul style ="list-style: none;">
-        <li> 
-            <img src = "{{ url_for('static', filename='images/queen-white.png') }}"/> 
-            <h3><a href="mockup2.html"><em>avocado</em> (1458) vs <em>Terry</em> (1522)</a></h3> 
-        </li>
-    
-    </ul>            
-</div> -->
-
-
-
 <div id="content-right">
-    <div id="searchResults" class="info-table centered">
-        <!-- <img id = "homeicon" src ="{{ url_for('static', filename='images/knight-white.png') }}"> -->
-    </div>
-
+    <div id="searchResults" class="info-table centered"></div>
     <div id="more-results" class="centered"></div>
 </div>
 
