@@ -5,11 +5,11 @@ A browsable catalog of chess games
 
 **Choose your search criteria...**
 
-![alt text](webapp/doc/homepage_screenshot.png)
+![alt text](doc/homepage_screenshot.png)
 
 **... and then analyze to your heart's content**
 
-![alt text](webapp/doc/game_view_screenshot.png)
+![alt text](doc/game_view_screenshot.png)
 
 **Features**
 1. Database of real-world chess games from lichess.org
