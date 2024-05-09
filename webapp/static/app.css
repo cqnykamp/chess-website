@@ -3,36 +3,25 @@ Authors: Barry Nwike and Charles Nykamp
 Final Project CS257 F22
  */
 
-
-
 /**
     ======= General  =======
 **/
-
-  
 body{
-    background-color: lightgreen;
+    background-color: #f5f5f6;
 
     margin: 0;
     height: 100%;
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-
-    /* font-family: fantasy; */
 }
 
 .main-content {
     flex: 1;
 }
 
-
 button {
-    /* background-color: #04AA6D; */
     background-color: #0b5091;
-
-    /* width: 80px; */
-    /* height: 60px; */
     font-family: fantasy;
     color: white;
     cursor: pointer;
@@ -47,25 +36,15 @@ input[type='number'] {
 }
 
 
-
-
-
-
-
-
 /**
    ======= Navbar and footer =======
 **/
-
 nav {
     left: 0;
     top: 0;
     right: 0;
     height: 1.5em;
-
-    /* background-color: #04AA6D; */
     background-color: #0b5091;
-    /* background-color: darkgreen; */
 
     color: white;
     font-size: xx-large;
@@ -82,10 +61,7 @@ nav img {
     height: 1em;
     padding-left: 1vw;
     padding-right: 0.5vw;
-    /* padding-top: 0.3vh; */
 }
-
-
 
 footer{
     height: 2em;
@@ -96,12 +72,9 @@ footer{
 }
 
 
-
 /**
     ======= Side-by-side and panels =======
 **/
-
-
 .centered {
     max-width: fit-content;
     margin: 0 auto;
@@ -137,7 +110,6 @@ footer{
     margin-bottom: 0vh;
 }
 
-
 .extra-padding {
     padding: 2vw;
 }
@@ -149,29 +121,16 @@ footer{
 }
 
 
-
 /**
     ======= Homepage specific =======
 **/
-
-/* input{
-    transition: width 0.4s ease-in-out;
-  }
-  
-input:focus {
-    width: 40%;
-} */
-
 #searchbutton{
     padding-left: 3em;
     padding-right: 3em;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
-
     font-size:  larger;
-
     text-align: center;
-    /* margin-right: 78%; */
 }
 
 .pageelements{
@@ -179,35 +138,15 @@ input:focus {
     border: 5px solid black;
     margin: 1rem;
     padding: 1rem 1rem;
-    
 }
+
 .introduction{
     display: inline-flex;
     padding: 1rem;
     text-align: left;
     width: 30%;
     margin-top: 10px;
-    
 }
-
-
-/* .searchfunction{ */
-    /* display: float; */
-    /* float: left; */
-    /* position: sticky; */
-    /* width: 25vw; */
-    /* position: fixed; */
-
-    /* height: 80vh; */
-    /* margin: 2vw; */
-
-    /* padding-left: 20px;
-    display:inline-flex;
-    margin-left: 30px;
-    border: 1px solid black;
-    text-align: left;
-    vertical-align: center; */
-/* } */
 
 .searchfunction ul {
     list-style-type: none;
@@ -219,7 +158,6 @@ input:focus {
     vertical-align: top;
 }
 
-
 #homeicon{
     float: left;
     height: 30%;
@@ -227,7 +165,6 @@ input:focus {
     padding-top: 5px;
     object-fit: contain;
 }
-
 
 li img{
     float: left;
@@ -241,16 +178,9 @@ li img{
     margin-bottom: 10px;
 }
 
-
-/* #content-right { */
-    /* margin-left: 25vw; */
-/* } */
-
-
 .info-table {
     margin-top: 5vh;
 }
-
 
 .info-table table,
 .info-table th, 
@@ -266,7 +196,6 @@ li img{
     padding-bottom: 0.5em;
 }
 
-
 .info-table th {
     border-bottom: 3px solid;
     background-color: #d0d0d0;
@@ -281,37 +210,16 @@ li img{
     background-color: #ebebeb;
 }
 
-
-/* #searchResults .details {
-    font-size: smaller;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-} */
-
-
 .stats-table, .stats-table td, .stats-table tr {
     /* border-style: none; */
     /* font-size: large; */
     background-color: inherit;
 }
   
-/* 
-.rowlink::before {
-    content: "";
-    display: block;
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 100%;
-} */
-
-
 
 /**
     ======= Game viewer specific =======
 **/
-
-
 .player {
     display: inline-block;
 }
@@ -332,40 +240,27 @@ li img{
 }
 
 
-
 #moves-panel h3 {
     flex: 2;
 }
-
 #moves-panel button {
-    /* width: 49%; */
-    /* height: 3em; */
     flex: 1;
     cursor: pointer;
 }
-
-
 #moves-panel li {
     display: inline;
     cursor: pointer;
 }
-
-
 #moves-panel li:hover {
     background-color: lightblue;
-
 }
- 
 #moves-panel .played {
-    /* font-weight: bold; */
     background-color: lightgray;
 }
-
 
 #captured {
     display: flex;
     height: 5vh;
-    /* width: 45vw; */
     flex-wrap: wrap;
 }
 
@@ -375,11 +270,9 @@ li img{
     object-fit: contain;
 }
 
-
 /**
     ======= Chess gameboard =======
 **/
-
 #gameboard tr {
     display: flex;
 }
@@ -396,7 +289,6 @@ li img{
     height: 80%;
     object-fit: contain;
 }
-
 
 .black-square {
     background-color: grey;
